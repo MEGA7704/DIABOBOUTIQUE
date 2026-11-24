@@ -1,0 +1,10 @@
+name = "global-gestion-pro"
+compatibility_date = "2026-11-24"
+pages_build_output_dir = "./public"
+[[d1_databases]]
+binding = "DB"
+database_name = "mirabelle_d1"
+database_id = "4be7abe8-4f5f-4bd3-b6bb-119c59914331"
+[[kv_namespaces]]
+binding = "KV"
+id = "5c3ba5b0f32f4bb3aedace0a05d26b00"

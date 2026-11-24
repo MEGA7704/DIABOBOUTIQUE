@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GLOBAL GESTION PRO — Gestion commerciale</title>
+<style>
+[hidden]{display:none!important}
+
+:root{--blue:#1557d6;--navy:#081b3a;--orange:#f58220;--bg:#f5f7fa;--line:#e2e8f0;--ink:#15233c;--muted:#64748b;--green:#16865a;--red:#c93c46}*{box-sizing:border-box}body{margin:0;font:14px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.app{display:flex;min-height:100vh}.sidebar{width:255px;flex-shrink:0;background:var(--navy);color:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{padding:25px 22px;border-bottom:1px solid #ffffff20}.brand strong{font-size:19px;letter-spacing:.4px}.brand small{color:#c4d3ec;display:block;margin-top:3px}.nav{padding:14px;overflow:auto}.nav button{width:100%;background:none;color:#bfcce1;border:0;text-align:left;border-radius:10px;padding:12px 13px;margin:2px 0;display:flex;gap:10px;align-items:center}.nav button.active,.nav button:hover{color:white;background:#ffffff1b}.nav button.active{border-left:3px solid var(--orange)}.sidefoot{margin-top:auto;padding:16px 22px;border-top:1px solid #ffffff1a;color:#c2cce0;font-size:12px}.main{min-width:0;flex:1}.topbar{background:white;min-height:70px;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:10px}.topbar h1{font-size:19px;margin:0}.topbar .sub{color:var(--muted);font-size:12px}.content{padding:27px;max-width:1500px;margin:auto}.page{display:none}.page.active{display:block}.head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}.head h2{font-size:23px;margin:0}.head p{color:var(--muted);margin:3px 0 0}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:9px;background:white;padding:10px 14px;color:var(--ink);font-weight:650}.btn:hover{filter:brightness(.96)}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.secondary{background:var(--navy);border-color:var(--navy);color:#fff}.btn.danger{color:var(--red);border-color:#f3c5c9}.btn.orange{background:var(--orange);border-color:var(--orange);color:#fff}.btn.sm{padding:6px 9px;font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:22px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:0 3px 18px #091a3007}.stat{padding:20px}.stat .k{color:var(--muted);font-size:13px}.stat .v{font-size:25px;font-weight:800;margin-top:7px}.stat .detail{margin-top:5px;color:var(--muted);font-size:12px}.panel{padding:20px;margin-bottom:20px}.panel h3{margin:0 0 14px;font-size:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;background:#f8fafc;color:#50627c;font-weight:650;font-size:12px}td,th{padding:12px 11px;border-bottom:1px solid #eef1f6}td{font-size:13px}tr:last-child td{border-bottom:0}.empty{text-align:center;padding:30px;color:var(--muted)}.pill{display:inline-flex;background:#e9f7ef;color:#17744f;padding:4px 9px;border-radius:99px;font-weight:650;font-size:11px}.pill.warn{background:#fff2db;color:#9a6404}.pill.bad{background:#ffe8e9;color:#a62b35}.search{width:min(340px,100%);border:1px solid var(--line);border-radius:9px;background:white;padding:10px 12px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#4c5f7a;font-weight:700}.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid #d4dce7;background:#fff;border-radius:9px;padding:10px 11px;color:var(--ink)}.field textarea{min-height:75px;resize:vertical}.hint{font-size:12px;color:var(--muted)}dialog{border:0;border-radius:17px;padding:0;box-shadow:0 25px 85px #06152e55;width:min(650px,calc(100vw - 22px));max-height:92vh}dialog::backdrop{background:#071629a8}.dialog-head{padding:20px 23px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.dialog-head h3{margin:0;font-size:19px}.dialog-body{padding:21px 23px;max-height:70vh;overflow:auto}.dialog-foot{padding:15px 23px;border-top:1px solid var(--line);display:flex;justify-content:end;gap:9px}.close{border:0;background:transparent;font-size:22px;color:#52647e}.saleitem{display:grid;grid-template-columns:2fr .8fr 1fr auto;gap:10px;align-items:end;margin:10px 0;padding:9px;background:#f8fafc;border:1px solid var(--line);border-radius:10px}.saleitem select,.saleitem input{width:100%;padding:9px;border:1px solid #d4dce7;border-radius:8px}.saleitem label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}.totalbox{text-align:right;background:#edf4ff;padding:15px;border-radius:10px;margin-top:12px;font-size:17px}.totalbox b{font-size:24px;color:var(--blue)}.chart{display:flex;align-items:flex-end;gap:12px;height:190px;border-bottom:1px solid var(--line);padding:10px 5px 0}.barcol{flex:1;min-width:15px;text-align:center;display:flex;flex-direction:column;justify-content:end;align-items:center;height:100%;gap:5px}.bar{width:100%;max-width:55px;background:linear-gradient(180deg,#4284ed,#1557d6);border-radius:6px 6px 0 0;min-height:2px}.barcol small{color:var(--muted);font-size:10px}.notice{border:1px solid #d8e6ff;background:#eef5ff;border-radius:10px;padding:12px 15px;color:#2f528b;font-size:13px;margin-bottom:18px}.menu-toggle{display:none}.footerline{font-size:12px;color:var(--muted);padding:10px 0 20px}.invoice{background:white;padding:35px;max-width:850px;margin:auto}.invoice-header{display:flex;justify-content:space-between;gap:20px;border-bottom:3px solid #1557d6;padding-bottom:20px}.invoice h2{font-size:26px;color:#1557d6;margin:0}.invoice table{margin:20px 0}.invoice .totals{margin-left:auto;max-width:340px}.invoice .totals div{display:flex;justify-content:space-between;padding:7px}.invoice .totals div:last-child{font-size:19px;font-weight:800;background:#edf4ff}.invoice small{color:#64748b}.invoice-details{display:flex;justify-content:space-between;gap:18px;margin-top:20px}.invoice-details>div{width:48%}#invoiceDialog{width:min(930px,calc(100vw - 20px))}#invoiceDialog .dialog-body{background:#f1f5f9}.noprint{}@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}@media(max-width:750px){.sidebar{position:fixed;left:-265px;z-index:20;transition:left .2s}.sidebar.open{left:0}.menu-toggle{display:inline-block}.topbar{padding:12px 16px}.content{padding:15px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{padding:15px}.stat .v{font-size:19px}.formgrid{grid-template-columns:1fr}.saleitem{grid-template-columns:1fr 1fr}.saleitem>div:first-child{grid-column:1/-1}.invoice-header,.invoice-details{flex-direction:column}.invoice-details>div{width:100%}.invoice{padding:16px}}@media print{body{background:#fff}body>*:not(#printZone){display:none!important}#printZone{display:block!important}#printZone .invoice{max-width:none;padding:8mm}#printZone table{white-space:normal}#printZone th{background:#f8fafc!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4;margin:12mm}}#printZone{display:none}
+
+.detail-table{min-width:1040px}.detail-table th{font-size:11px}.detail-table td{font-size:12px}.totalrow{background:#fff5ce;font-weight:bold}.bilan-paper{font-family:Arial,sans-serif;color:#182728;font-size:11px;background:#fff}.report-pdf-head{display:flex;gap:20px;align-items:center;justify-content:space-between;border-top:4px solid #1c2221;padding:14px 4px}.report-pdf-logo{border:2px solid #00554f;color:#00554f;font-weight:900;font-size:22px;border-radius:10px;padding:10px;text-align:center}.report-pdf-logo small{display:block;font-size:8px}.report-pdf-company{text-align:center;flex:1;font-size:10px}.report-pdf-company strong{font-size:16px}.report-pdf-ribbon{display:flex;align-items:center;background:#005047;color:white;margin:14px 0;padding:14px 12px;gap:15px;border-radius:5px}.report-pdf-ribbon span{font-size:10px;min-width:120px}.report-pdf-ribbon b{font-size:17px;letter-spacing:.2px}.report-pdf-sub{text-align:center;border-top:3px solid #282828;padding:13px;font-weight:800;color:#8c6f08;font-size:12px}.report-pdf-sub div{font-size:10px}.report-pdf-section{border:1px solid #caa71b;border-radius:8px;padding:10px;margin:14px 0;break-inside:auto}.report-pdf-section h3{background:#005047;color:#eccc41;font-size:11px;padding:9px 10px;margin:0 0 8px;border-radius:4px;break-after:avoid}.report-pdf-table,.report-pdf-summary{width:100%;border-collapse:collapse;white-space:normal;table-layout:auto}.report-pdf-table th,.report-pdf-summary th{background:#005047!important;color:#fff!important;font-size:8px;padding:7px 4px;text-align:left}.report-pdf-table td,.report-pdf-summary td{padding:6px 4px;border-bottom:1px solid #ddd;font-size:8px;overflow-wrap:anywhere}.report-pdf-summary th,.report-pdf-summary td{font-size:10px}.report-pdf-table .totalrow td{background:#fff3c0!important;font-weight:800}.report-pdf-section tr{break-inside:avoid}.report-pdf-notes{font-size:9px;color:#69716c}.report-pdf-sign{text-align:right;padding:25px 15px 45px;font-size:12px}.report-pdf-sign div{padding-top:35px;color:#777}
+@media print{#printZone .bilan-paper{display:block!important;width:100%;padding:0;margin:0}#printZone .report-pdf-table td{font-size:7.5px}#printZone .report-pdf-section{border-color:#caa71b!important}#printZone .report-pdf-ribbon,#printZone .report-pdf-table th,#printZone .report-pdf-summary th,#printZone .report-pdf-section h3{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}#printZone .report-pdf-section{break-inside:auto}@page{size:A4 portrait;margin:9mm}}
+
+/* Étiquettes de vente A4 — 4 colonnes × 5 lignes */
+.label-check{display:flex;align-items:center;gap:9px;font-weight:700;cursor:pointer}.label-check input,.label-choice input{width:18px;height:18px;accent-color:var(--blue)}.label-selection{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px}.label-choice{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;min-width:0}.label-choice:hover{background:#eef5ff}.label-choice strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.label-preview-sheet{width:100%;margin:12px auto 20px;background:#f8fafc;border:1px dashed #a0aec0;padding:10px}.label-sheet-meta{font-size:12px;color:#64748b;margin-bottom:9px}.label-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.5mm}.product-label{border:1px solid #9cabbc;border-radius:2mm;background:#fff;color:#101828;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;min-width:0;height:50mm;padding:3.3mm 2mm;overflow:hidden;break-inside:avoid}.product-label .label-name{font-weight:800;font-size:11px;line-height:1.18;overflow-wrap:anywhere;min-height:24px;display:flex;align-items:center;justify-content:center}.product-label .label-qr{width:26mm;height:26mm;display:flex;align-items:center;justify-content:center}.product-label .label-qr svg{width:100%;height:100%;display:block}.product-label .label-price{font-size:13px;line-height:1.1;font-weight:900;color:#0b376b}.product-label .label-ref{font-size:8px;color:#64748b}@media(max-width:750px){.label-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-label{height:49mm}.label-selection{grid-template-columns:1fr}}
+@media print{#printZone .label-print{width:190mm;margin:0 auto;padding:0!important;max-width:none!important}#printZone .label-a4{height:277mm;width:190mm;overflow:hidden;break-after:page;page-break-after:always}#printZone .label-a4:last-child{break-after:auto;page-break-after:auto}#printZone .label-grid{display:grid;grid-template-columns:repeat(4,47.5mm);grid-template-rows:repeat(5,55.4mm);gap:0}#printZone .product-label{width:47.5mm;height:55.4mm;border:0.2mm solid #aaa;border-radius:0;padding:4mm 2mm;break-inside:avoid;page-break-inside:avoid}#printZone .product-label .label-name{font-size:10pt;min-height:10mm}#printZone .product-label .label-qr{width:26mm;height:26mm}#printZone .product-label .label-price{font-size:12pt;color:#000}#printZone .product-label .label-ref{font-size:7pt}@page{size:A4 portrait;margin:10mm}}
+</style>
+<style>.v3-alert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.v3-alert{background:#fff7e9;border:1px solid #f9d6a1;border-radius:9px;padding:11px 13px;color:#885519;font-size:13px}.page .panel{overflow-wrap:anywhere} .panel table td{vertical-align:middle}button:disabled{opacity:.55;cursor:not-allowed}#stockRows,#debtRows{font-variant-numeric:tabular-nums}@media(max-width:750px){.stat .v{overflow-wrap:anywhere;font-size:17px}.topbar .actions .btn{font-size:11px}}@media print{.bilan-paper{font-size:10px} .report-pdf-table{table-layout:fixed}.report-pdf-table th,.report-pdf-table td{word-break:normal;overflow-wrap:anywhere}.report-pdf-section{break-inside:auto}.report-pdf-summary tr{break-inside:avoid}}</style></head>
+<body>
+<div class="app"><aside class="sidebar" id="sidebar"><div class="brand"><strong>◈ GLOBAL GESTION PRO</strong><small>Gestion & facturation</small></div><nav class="nav" id="nav">
+<button data-page="dashboard" class="active">▦ &nbsp; Tableau de bord</button><button data-page="clients">♙ &nbsp; Clients</button><button data-page="products">▣ &nbsp; Produits & services</button><button data-page="sales">🛒 &nbsp; Ventes</button><button data-page="debts">💳 &nbsp; Créances clients</button><button data-page="stock">▤ &nbsp; Stocks & inventaire</button><button data-page="cash">💰 &nbsp; Trésorerie</button><button data-page="obligations">📅 &nbsp; Obligations</button><button data-page="closing">✓ &nbsp; Clôture de caisse</button><button data-page="audit">◴ &nbsp; Journal d’audit</button><button data-page="expenses">↘ &nbsp; Dépenses</button><button data-page="reports">▥ &nbsp; Rapports</button><button data-page="settings">⚙ &nbsp; Paramètres</button></nav><div class="sidefoot"><a href="/espace">Espace boutique / abonnement</a><br><a href="/">Catalogue public</a><br>Version 3.6 · Cloud<br>MEGA SERVICES SARL</div></aside>
+<main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:10px"><button class="btn menu-toggle" onclick="toggleMenu()">☰</button><div><h1 id="pageTitle">Tableau de bord</h1><div class="sub" id="companyTop">GLOBAL GESTION PRO</div></div></div><div class="actions"><span id="todayDate" class="hint"></span><button class="btn primary" onclick="openSale()">+ Nouvelle vente</button></div></header><div class="content">
+<section class="page active" id="dashboard"><div class="head"><div><h2>Vue d'ensemble</h2><p>Les principaux indicateurs de votre activité commerciale</p></div><button class="btn" onclick="navigate('reports')">Voir les rapports</button></div><div class="notice">💾 Données synchronisées avec Cloudflare D1. Rechargez la page pour récupérer les dernières modifications.</div><div class="panel"><h3>Alertes et actions prioritaires</h3><div id="v3Alerts" class="v3-alert-grid"></div></div><div class="stats" id="stats"></div><div class="grid2"><div class="panel"><h3>Ventes des 7 derniers jours</h3><div class="chart" id="chart"></div></div><div class="panel"><h3>Dernières ventes</h3><div class="tablewrap"><table><thead><tr><th>N°</th><th>Client</th><th>Total</th><th>État</th></tr></thead><tbody id="recentSales"></tbody></table></div></div></div></section>
+<section class="page" id="clients"><div class="head"><div><h2>Gestion des clients</h2><p>Fiches clients et historiques des achats</p></div><button class="btn primary" onclick="openClient()">+ Ajouter un client</button></div><div class="panel"><div class="head"><input class="search" id="clientSearch" placeholder="Rechercher un client..." oninput="renderClients()"><span class="hint" id="clientCount"></span></div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Nom / raison sociale</th><th>Téléphone</th><th>E-mail</th><th>Achats</th><th>Créances</th><th>Actions</th></tr></thead><tbody id="clientsTable"></tbody></table></div></div></section>
+<section class="page" id="labels"><div class="head"><div><h2>Étiquettes de vente</h2><p>Sélectionnez les articles, visualisez les cartes et imprimez 20 étiquettes par page A4 (4 colonnes × 5 lignes).</p></div><div class="actions"><button class="btn" onclick="navigate('products')">← Produits & services</button><button class="btn primary" onclick="printProductLabels()">🖨 Imprimer les étiquettes sélectionnées</button></div></div><div class="notice">Chaque étiquette contient le nom, un QR code généré localement à partir de la référence du produit, et le prix de vente. Le QR code identifie le produit : il ne constitue pas un lien de paiement.</div><div class="panel"><div class="head"><div class="actions"><label class="label-check"><input type="checkbox" id="labelsSelectAll" onchange="toggleAllProductLabels(this.checked)"> Tout sélectionner</label><span id="labelsCount" class="pill">0 sélectionnée(s)</span></div><input id="labelsSearch" class="search" placeholder="Rechercher un produit ou service…" oninput="renderProductLabels()"></div><div class="label-selection" id="labelsChooser"></div></div><div class="panel"><div class="head"><div><h3 style="margin:0">Aperçu des étiquettes sélectionnées</h3><p class="hint" id="labelsPagesNote">20 cartes maximum par page A4</p></div><button class="btn primary" onclick="printProductLabels()">Imprimer / Enregistrer en PDF</button></div><div id="labelsPreview"></div></div></section>
+<section class="page" id="products"><div class="head"><div><h2>Produits & services</h2><p>Catalogue, tarifs et suivi des stocks</p></div><div class="actions"><button class="btn secondary" onclick="navigate('labels')">▦ Imprimer étiquette de vente</button><button class="btn primary" onclick="openProduct()">+ Ajouter un produit</button></div></div><div class="panel"><div class="head"><input class="search" id="productSearch" placeholder="Rechercher un produit..." oninput="renderProducts()"><span class="hint" id="productCount"></span></div><div class="tablewrap"><table><thead><tr><th>Référence</th><th>Désignation</th><th>Type</th><th>Prix d'achat</th><th>Prix de vente</th><th>Stock</th><th>Actions</th></tr></thead><tbody id="productsTable"></tbody></table></div></div></section>
+<section class="page" id="sales"><div class="head"><div><h2>Historique des ventes</h2><p>Toutes les transactions enregistrées</p></div><button class="btn primary" onclick="openSale()">+ Nouvelle vente</button></div><div class="panel"><div class="head"><input class="search" id="saleSearch" placeholder="Rechercher une vente / un client..." oninput="renderSales()"><button class="btn" onclick="downloadCSV('sales')">Exporter CSV</button></div><div class="tablewrap"><table><thead><tr><th>Numéro</th><th>Date</th><th>Client</th><th>Total</th><th>Payé</th><th>Reste</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="salesTable"></tbody></table></div></div></section>
+<section class="page" id="expenses"><div class="head"><div><h2>Dépenses</h2><p>Enregistrement des charges de l'entreprise</p></div><button class="btn primary" onclick="openExpense()">+ Nouvelle dépense</button></div><div class="panel"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Libellé</th><th>Catégorie</th><th>Montant</th><th>Actions</th></tr></thead><tbody id="expensesTable"></tbody></table></div></div></section>
+<section class="page" id="reports">
+<div class="head"><div><h2>Rapport bilan détaillé de l’entreprise</h2><p>Situation commerciale et financière, inspirée du modèle de bilan fourni</p></div><div class="actions"><button class="btn" onclick="downloadReportCSV()">Exporter détails CSV</button><button class="btn primary" onclick="printReport()">↓ Enregistrer en PDF / Imprimer</button></div></div>
+<div class="panel"><div class="formgrid"><div class="field"><label>Date de début</label><input type="date" id="reportFrom" onchange="renderReports()"></div><div class="field"><label>Date de fin</label><input type="date" id="reportTo" onchange="renderReports()"></div></div><p class="hint">La génération du PDF passe par la fenêtre d'impression du navigateur : sélectionnez « Enregistrer au format PDF ».</p></div>
+<div class="stats" id="reportStats"></div><div class="panel"><h3>Comparaison avec la période précédente</h3><div id="v3Comparison"></div></div>
+<div class="panel"><h3>Ventes générales des produits et services vendus</h3><div class="tablewrap"><table class="detail-table"><thead><tr><th>Catégorie</th><th>Produit / service</th><th>Nombre de ventes</th><th>Clients servis*</th><th>Quantité totale</th><th>Chiffre d'affaires</th><th>Frais service</th><th>Charges estimées</th><th>Bénéfice estimé</th></tr></thead><tbody id="reportProductRows"></tbody><tfoot id="reportProductFoot"></tfoot></table></div><p class="hint">* Clients servis : nombre de lignes de vente/quantités de service, sans identification certaine des clients distincts. Les frais de service sont indiqués à zéro en l'absence d'un champ dédié dans les ventes actuelles.</p></div>
+<div class="grid2"><div class="panel"><h3>Résumé financier de l'exercice</h3><div class="tablewrap"><table><thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead><tbody id="reportSummaryRows"></tbody></table></div></div><div class="panel"><h3>Répartition des ventes par catégorie</h3><div class="tablewrap"><table><thead><tr><th>Catégorie</th><th>Ventes</th><th>Chiffre d'affaires</th><th>Marge estimée</th></tr></thead><tbody id="reportCategoryRows"></tbody></table></div></div></div>
+<div class="grid2"><div class="panel"><h3>Dépenses de la période</h3><div class="tablewrap"><table><thead><tr><th>Catégorie</th><th>Nombre</th><th>Montant</th></tr></thead><tbody id="reportExpenseRows"></tbody></table></div></div><div class="panel"><h3>État des encaissements et créances</h3><div class="tablewrap"><table><thead><tr><th>Indicateur</th><th>Montant</th></tr></thead><tbody id="reportPaymentsRows"></tbody></table></div></div></div>
+<div class="panel"><h3>Détail des ventes enregistrées</h3><div class="tablewrap"><table><thead><tr><th>Date</th><th>N° facture</th><th>Client</th><th>Total</th><th>Encaissé cumulé</th><th>Reste dû</th><th>Coût</th></tr></thead><tbody id="reportRows"></tbody></table></div></div>
+<div class="panel"><h3>Obligations de l'exercice et calcul des bénéfices</h3><div class="tablewrap"><table><thead><tr><th>Mois</th><th>Obligation / assiette</th><th>Bénéfice de référence</th><th>Taux / forfait</th><th>Charge calculée</th><th>Payé</th><th>Reste</th></tr></thead><tbody id="reportObligationsRows"></tbody></table></div><p class="hint">Calcul au mois entier pour chaque mois inclus dans la période sélectionnée ; une période partielle inclut les obligations du mois concerné. Les dépenses de règlement des obligations ne sont pas soustraites une seconde fois.</p></div><div class="panel"><h3>Analyse narrative de la situation</h3><p id="reportNarrative"></p><p class="hint">Bilan de gestion estimatif, non certifié : ne remplace pas les états comptables, l'inventaire ni les obligations fiscales.</p></div>
+</section>
+
+<section class="page" id="debts"><div class="head"><div><h2>Créances clients</h2><p>Factures ouvertes, échéances et relances</p></div><button class="btn" onclick="navigate('clients')">Fiches clients</button></div><div class="stats" id="debtStats"></div><div class="panel"><div class="head"><input class="search" id="debtSearch" placeholder="Rechercher par client ou facture..."></div><div class="tablewrap"><table><thead><tr><th>Facture</th><th>Client</th><th>Date</th><th>Échéance</th><th>Total</th><th>Encaissé</th><th>Reste</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="debtRows"></tbody></table></div></div></section>
+<section class="page" id="stock"><div class="head"><div><h2>Stocks & inventaire</h2><p>Quantités, seuils, valorisation et ajustements tracés</p></div><button class="btn primary" onclick="navigate('products')">Catalogue</button></div><div class="stats" id="stockStats"></div><div class="panel"><h3>État des stocks</h3><div class="tablewrap"><table><thead><tr><th>Référence</th><th>Produit</th><th>Coût unitaire</th><th>Stock réel</th><th>Seuil</th><th>Valeur</th><th>Alerte</th><th>Inventaire</th></tr></thead><tbody id="stockRows"></tbody></table></div></div><div class="panel"><h3>Historique des ajustements</h3><div class="tablewrap"><table><thead><tr><th>Date</th><th>Produit</th><th>Avant</th><th>Après</th><th>Motif</th></tr></thead><tbody id="stockMovementRows"></tbody></table></div></div></section>
+<section class="page" id="cash"><div class="head"><div><h2>Trésorerie et journal de caisse</h2><p>Encaissements, décaissements et mouvements par mode</p></div><button class="btn primary" onclick="document.getElementById('cashAdjustmentForm').reset();document.getElementById('cashAdjDate').value=iso();openDialog('cashAdjustmentDialog')">+ Mouvement manuel</button></div><div class="panel"><div class="formgrid"><div class="field"><label>Début</label><input type="date" id="cashFrom"></div><div class="field"><label>Fin</label><input type="date" id="cashTo"></div></div></div><div class="stats" id="cashStats"></div><div class="panel"><h3>Soldes par mode de règlement</h3><div class="tablewrap"><table><thead><tr><th>Mode de paiement</th><th>Solde net enregistré</th></tr></thead><tbody id="cashMethods"></tbody></table></div></div><div class="panel"><h3>Journal chronologique des opérations</h3><div class="tablewrap"><table><thead><tr><th>Date</th><th>Type</th><th>Référence</th><th>Description</th><th>Mode</th><th>Montant</th></tr></thead><tbody id="cashRows"></tbody></table></div></div></section>
+<section class="page" id="obligations"><div class="head"><div><h2>Obligations mensuelles</h2><p>Ajoutez, suivez et calculez les obligations de l’exercice actif : montants fixes ou pourcentage du bénéfice général, d’une catégorie ou d’un produit/service.</p></div><button class="btn primary" onclick="openDialog('obligationDialog')">+ Nouvelle obligation</button></div><div class="panel"><div class="field" style="max-width:240px"><label>Mois suivi</label><input type="month" id="obMonth"></div></div><div class="stats" id="obStats"></div><div class="panel"><div class="tablewrap"><table><thead><tr><th>Libellé</th><th>Type de calcul / assiette</th><th>Bénéfice de référence</th><th>Taux / forfait</th><th>Calculé</th><th>Réglé</th><th>Reste</th><th>Échéance</th><th>Actions</th></tr></thead><tbody id="obRows"></tbody></table></div><p class="hint">Les pourcentages sont appliqués à une assiette de bénéfice positive (minimum 0). Les obligations sont déduites une seule fois dans les rapports : un paiement règle l'obligation et affecte la trésorerie, sans créer une deuxième charge de résultat. Le calcul est actualisé avec les ventes du mois sélectionné.</p></div></section>
+<section class="page" id="closing"><div class="head"><div><h2>Clôture journalière de caisse</h2><p>État de caisse et contrôle des écarts</p></div><button class="btn" onclick="v3CashPrint()">Imprimer le journal PDF</button></div><div class="panel"><div class="formgrid"><div class="field"><label>Date de la clôture</label><input type="date" id="closeDate"></div><div class="field"><label>Montant réellement compté (tous moyens)</label><input id="closeRecorded" type="number" min="0" step="1" placeholder="0"></div></div><p class="hint" id="closeStatus"></p><button class="btn primary" onclick="v3SaveClose()">Enregistrer la clôture</button></div><div class="stats" id="closeStats"></div><div class="panel"><h3>Opérations du jour</h3><div class="tablewrap"><table><thead><tr><th>Type</th><th>Description</th><th>Mode</th><th>Montant</th></tr></thead><tbody id="closeRows"></tbody></table></div></div></section>
+<section class="page" id="audit"><div class="head"><div><h2>Journal d’audit</h2><p>Traçabilité locale des principales écritures et annulations</p></div></div><div class="notice">Cette traçabilité locale est indicative : elle ne constitue pas un journal infalsifiable et ne remplace pas une piste d’audit sur serveur sécurisé.</div><div class="panel"><div class="tablewrap"><table><thead><tr><th>Date et heure</th><th>Action</th><th>Précision</th></tr></thead><tbody id="auditRows"></tbody></table></div></div></section>
+<section class="page" id="settings"><div class="head"><div><h2>Paramètres de l'entreprise</h2><p>Identité légale et éléments utilisés dans les rapports officiels.</p></div></div><div class="panel"><h3>Informations de l’entreprise</h3><form id="settingsForm"><div class="formgrid"><div class="field"><label>Raison sociale &amp; Forme juridique *</label><input name="name" required placeholder="Ex. MEGA SERVICES SARL U"></div><div class="field"><label>RCCM</label><input name="rccm" placeholder="Numéro RCCM"></div><div class="field"><label>Compte Contribuable</label><input name="taxId" placeholder="Compte contribuable"></div><div class="field"><label>Gérant</label><input name="manager" placeholder="Nom du gérant"></div><div class="field"><label>Adresse</label><input name="address"></div><div class="field"><label>Téléphone</label><input name="phone" type="tel"></div><div class="field"><label>E-mail</label><input name="email" type="email"></div><div class="field"><label>Capital social (en devise du compte)</label><input name="capital" type="number" min="0" step="1" placeholder="Ex. 1000000"></div><div class="field"><label>Devise du compte</label><select name="currency"><option value="XOF">XOF — Franc CFA</option><option value="EUR">EUR — Euro</option><option value="USD">USD — Dollar américain</option></select></div><div class="field full"><label>Préfixe du lien de paiement à distance Wave</label><input name="wavePaymentUrl" type="url" inputmode="url" placeholder="https://pay.wave.com/m/.../c/ci/?amount=" autocomplete="url"><small class="hint">Collez le préfixe de votre lien officiel Wave, terminé par <b>amount=</b>, sans indiquer de montant. Exemple : https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount= — le solde restant sera ajouté automatiquement. Pour 300 F CFA : amount=300.</small></div><div class="field full"><label>Pied de facture</label><textarea name="footer"></textarea></div></div><p class="hint">Les transactions de cette version sont calculées en F CFA (XOF). La devise du compte est une information affichée : elle ne convertit pas automatiquement les montants. Les factures PDF obtenues par impression ne constituent pas, à elles seules, des factures fiscales certifiées (FNE).</p><button class="btn primary" type="submit">Enregistrer les paramètres</button></form></div><div class="panel"><h3>Identité visuelle du rapport</h3><div class="formgrid"><div class="field"><label>Logo (PNG/JPG/WebP, 250 Ko maximum)</label><input type="file" id="companyLogo" accept="image/png,image/jpeg,image/webp"><button class="btn sm" type="button" id="companyLogoRemove">Retirer le logo</button></div></div><p class="hint">Le nom du gérant est défini dans les informations de l’entreprise. Le logo est enregistré automatiquement à la modification.</p></div><div class="panel"><h3>Sauvegarde des données</h3><p class="hint">Téléchargez régulièrement une sauvegarde JSON. La restauration remplace toutes les données actuelles de cette version.</p><div class="actions"><button class="btn secondary" onclick="exportBackup()">↓ Exporter la sauvegarde</button><label class="btn" style="cursor:pointer">↑ Restaurer une sauvegarde<input type="file" accept=".json,application/json" hidden onchange="importBackup(event)"></label></div></div></section>
+<div class="footerline">GLOBAL GESTION PRO V3 · Cloud · © <span id="v3FooterName">MEGA SERVICES SARL</span></div></div></main></div>
+<dialog id="clientDialog"><div class="dialog-head"><h3 id="clientDialogTitle">Nouveau client</h3><button class="close" onclick="closeDialog('clientDialog')">×</button></div><form id="clientForm"><div class="dialog-body"><input type="hidden" name="id"><div class="formgrid"><div class="field"><label>Nom / raison sociale *</label><input name="name" required maxlength="140"></div><div class="field"><label>Type</label><select name="type"><option>Particulier</option><option>Entreprise</option></select></div><div class="field"><label>Téléphone</label><input name="phone" maxlength="40"></div><div class="field"><label>E-mail</label><input type="email" name="email"></div><div class="field full"><label>Adresse</label><input name="address"></div></div></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('clientDialog')">Annuler</button><button class="btn primary">Enregistrer</button></div></form></dialog>
+<dialog id="productDialog"><div class="dialog-head"><h3 id="productDialogTitle">Nouveau produit</h3><button class="close" onclick="closeDialog('productDialog')">×</button></div><form id="productForm"><div class="dialog-body"><input type="hidden" name="id"><div class="formgrid"><div class="field full"><label>Désignation *</label><input name="name" required maxlength="160"></div><div class="field"><label>Type</label><select name="type"><option value="Produit">Produit (avec stock)</option><option value="Service">Service (sans stock)</option></select></div><div class="field"><label>Catégorie</label><input name="category" placeholder="Ex. Accessoires"></div><div class="field"><label>Prix d'achat / coût unitaire (F CFA)</label><input name="cost" type="number" min="0" step="1" value="0" required></div><div class="field"><label>Prix de vente (F CFA) *</label><input name="price" type="number" min="0" step="1" value="0" required></div><div class="field"><label>Quantité en stock (produits)</label><input name="stock" type="number" min="0" step="1" value="0" required></div><div class="field"><label>Seuil alerte</label><input name="minStock" type="number" min="0" step="1" value="5"></div></div></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('productDialog')">Annuler</button><button class="btn primary">Enregistrer</button></div></form></dialog>
+<dialog id="saleDialog"><div class="dialog-head"><h3>Nouvelle vente / facture</h3><button class="close" onclick="closeDialog('saleDialog')">×</button></div><form id="saleForm"><div class="dialog-body"><div class="formgrid"><div class="field"><label>Client *</label><select id="saleClient" required onchange="updateCreditClientRequirement()"></select><small class="hint" id="creditClientHint">Pour toute vente à crédit ou restant partiellement impayée, sélectionnez un client enregistré avec son nom.</small></div><div class="field"><label>Date de vente</label><input id="saleDate" type="date" required></div></div><div class="head" style="margin:20px 0 5px"><h3 style="margin:0">Articles</h3><button type="button" class="btn sm" onclick="addSaleRow()">+ Ligne</button></div><div id="saleItems"></div><div class="formgrid" style="margin-top:15px"><div class="field"><label>Remise globale (F CFA)</label><input id="saleDiscount" type="number" min="0" value="0" oninput="recalcSale()"></div><div class="field"><label>Montant payé à la vente (F CFA)</label><input id="salePaid" type="number" min="0" value="0" oninput="recalcSale();updateCreditClientRequirement()"></div><div class="field"><label>Mode de paiement</label><select id="saleMethod" onchange="updateCreditClientRequirement()"><option>Espèces</option><option>Orange Money</option><option>MTN Money</option><option>Moov Money</option><option>Wave</option><option>Virement</option><option>Chèque</option><option>Crédit</option></select></div><div class="field"><label>Échéance (vente à crédit)</label><input id="saleDueDate" type="date"></div><div class="field"><label>Observations</label><input id="saleNote" placeholder="Facultatif"></div></div><div class="totalbox">Total à payer : <b id="saleTotal">0 F CFA</b><div class="hint" id="saleRemainder"></div></div></div><div class="dialog-foot"><button type="button" class="btn" onclick="closeDialog('saleDialog')">Annuler</button><button class="btn primary">Valider la vente</button></div></form></dialog>
+<dialog id="expenseDialog"><div class="dialog-head"><h3>Nouvelle dépense</h3><button class="close" onclick="closeDialog('expenseDialog')">×</button></div><form id="expenseForm"><div class="dialog-body"><div class="formgrid"><div class="field"><label>Date *</label><input type="date" name="date" required></div><div class="field"><label>Catégorie</label><select name="category"><option>Achats</option><option>Loyer</option><option>Transport</option><option>Électricité</option><option>Eau</option><option>Salaires</option><option>Fournitures</option><option>Entretien</option><option>Autres</option></select></div><div class="field full"><label>Libellé *</label><input name="label" required></div><div class="field full"><label>Montant (F CFA) *</label><input name="amount" type="number" min="1" step="1" required></div><div class="field"><label>Mode de paiement</label><select name="method"><option>Espèces</option><option>Wave</option><option>Orange Money</option><option>MTN Money</option><option>Moov Money</option><option>Virement</option><option>Chèque</option></select></div></div></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('expenseDialog')">Annuler</button><button class="btn primary">Enregistrer</button></div></form></dialog>
+<dialog id="paymentDialog"><div class="dialog-head"><h3>Enregistrer un règlement</h3><button class="close" onclick="closeDialog('paymentDialog')">×</button></div><form id="paymentForm"><div class="dialog-body"><input type="hidden" name="saleId"><p id="paymentInfo"></p><div class="formgrid"><div class="field"><label>Montant à encaisser (F CFA) *</label><input name="amount" type="number" min="1" step="1" required></div><div class="field"><label>Mode</label><select name="method"><option>Espèces</option><option>Orange Money</option><option>MTN Money</option><option>Moov Money</option><option>Wave</option><option>Virement</option><option>Chèque</option></select></div><div class="field full"><label>Date</label><input type="date" name="date" required></div></div></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('paymentDialog')">Annuler</button><button class="btn primary">Enregistrer le règlement</button></div></form></dialog>
+<dialog id="invoiceDialog"><div class="dialog-head noprint"><h3>Facture</h3><div class="actions"><button class="btn primary" onclick="printInvoice()">Imprimer / Enregistrer PDF</button><button class="close" onclick="closeDialog('invoiceDialog')">×</button></div></div><div class="dialog-body" id="invoiceView"></div></dialog><dialog id="cashAdjustmentDialog"><div class="dialog-head"><h3>Mouvement manuel de trésorerie</h3><button class="close" onclick="closeDialog('cashAdjustmentDialog')">×</button></div><form id="cashAdjustmentForm"><div class="dialog-body"><div class="formgrid"><div class="field"><label>Date</label><input type="date" name="date" id="cashAdjDate" required></div><div class="field"><label>Type</label><select name="type"><option>Entrée</option><option>Sortie</option></select></div><div class="field"><label>Mode</label><select name="method"><option>Espèces</option><option>Wave</option><option>Orange Money</option><option>MTN Money</option><option>Moov Money</option><option>Virement</option></select></div><div class="field"><label>Montant</label><input name="amount" type="number" min="1" step="1" required></div><div class="field full"><label>Motif / libellé</label><input name="label" required maxlength="180" placeholder="Apport de caisse, transfert, retrait..."></div></div><p class="hint">Attention : ne ressaisissez pas ici un paiement de vente ou une dépense déjà enregistré.</p></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('cashAdjustmentDialog')">Fermer</button><button class="btn primary">Enregistrer</button></div></form></dialog>
+<dialog id="obligationDialog"><div class="dialog-head"><h3>Nouvelle obligation mensuelle</h3><button class="close" onclick="closeDialog('obligationDialog')">×</button></div><form id="obligationForm"><div class="dialog-body"><div class="formgrid"><div class="field full"><label>Libellé</label><input name="label" required maxlength="160" placeholder="Ex. Loyer du magasin"></div><div class="field"><label>Catégorie</label><select name="category"><option>Loyer</option><option>Salaires</option><option>Électricité</option><option>Eau</option><option>Télécommunication</option><option>Entretien</option><option>Autres</option></select></div><div class="field full"><label>Base de calcul de l’obligation</label><select name="basis" id="obBasis" onchange="v35ToggleBasis()"><option value="fixed">Forfait fixe mensuel (mode existant)</option><option value="general">Obligation basée sur les bénéfices généraux</option><option value="category">Obligation basée sur une catégorie</option><option value="product">Obligation basée sur un produit ou service</option></select></div><div class="field full" id="obCategoryField" hidden><label>Catégorie concernée</label><select name="targetCategory" id="obTargetCategory"></select></div><div class="field full" id="obProductField" hidden><label>Produit ou service concerné</label><select name="targetProduct" id="obTargetProduct"></select></div><div class="field" id="obAmountField"><label>Montant fixe mensuel (XOF)</label><input name="amount" id="obFixedAmount" type="number" min="1" step="1" required></div><div class="field" id="obRateField" hidden><label>Pourcentage du bénéfice concerné (%)</label><input name="rate" id="obRate" type="number" min="0" max="100" step="0.01" placeholder="Ex. 10"></div><div class="field full"><p id="obFormulaPreview" class="notice" style="margin:0">En mode forfait, renseignez le montant mensuel prévu.</p></div><div class="field"><label>Jour d’échéance</label><input name="day" type="number" min="1" max="31" value="5"></div><div class="field"><label>Date de début</label><input name="start" type="date"></div></div></div><div class="dialog-foot"><button class="btn" type="button" onclick="closeDialog('obligationDialog')">Annuler</button><button class="btn primary">Créer</button></div></form></dialog>
+<div id="printZone"></div>
+<script>
+'use strict';
+const routes={dashboard:'/gestion/dashboard',clients:'/gestion/clients',products:'/gestion/produits',labels:'/gestion/etiquettes',sales:'/gestion/ventes',debts:'/gestion/creances',stock:'/gestion/stocks',cash:'/gestion/tresorerie',obligations:'/gestion/obligations',closing:'/gestion/cloture',audit:'/gestion/audit',expenses:'/gestion/depenses',reports:'/gestion/rapports',settings:'/gestion/parametres'}; const STORE='global_gestion_pro_local_v1';
+const defaults=()=>({company:{name:'MEGA SERVICES SARL',phone:'',address:'Diabo, Côte d’Ivoire',email:'',rccm:'',taxId:'',manager:'',capital:'',currency:'XOF',footer:'Merci pour votre confiance !'},clients:[],products:[],sales:[],expenses:[],counter:{client:0,product:0,sale:0,expense:0}});
+let db=defaults(); let version=0, csrf='', queue=Promise.resolve();
+function validDB(x){return x&&typeof x==='object'&&x.company&&typeof x.company.name==='string'&&['clients','products','sales','expenses'].every(k=>Array.isArray(x[k]))&&x.counter&&typeof x.counter==='object'}
+if(!validDB(db))db=defaults();
+const money=n=>Math.round(Number(n)||0).toLocaleString('fr-FR')+' F CFA';const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const iso=()=>new Date().toLocaleDateString('en-CA');const id=()=>crypto.randomUUID?crypto.randomUUID():'id'+Date.now()+Math.random().toString(36).slice(2);const num=(n)=>Number(n)||0;
+function save(){const snapshot=JSON.stringify(db);renderAll();queue=queue.then(async()=>{const r=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF':csrf},body:JSON.stringify({version,data:JSON.parse(snapshot)})});if(!r.ok)throw Error((await r.json()).error);version=(await r.json()).version}).catch(e=>{alert('Sauvegarde refusée : '+e.message+' — exportez votre sauvegarde avant de recharger.');throw e});}
+function next(key,prefix){db.counter[key]=num(db.counter[key])+1;return prefix+String(db.counter[key]).padStart(5,'0')}
+function clientName(cid){return cid==='walkin'?'Client comptoir':db.clients.find(x=>x.id===cid)?.name||'Client archivé'}
+function paid(s){return (s.payments||[]).reduce((a,p)=>a+num(p.amount),0)}function due(s){return Math.max(0,num(s.total)-paid(s))}function status(s){return due(s)===0?'Payée':paid(s)>0?'Partielle':'Impayée'}
+function badge(s){const t=status(s);return `<span class="pill ${t==='Payée'?'':t==='Partielle'?'warn':'bad'}">${t}</span>`}
+function empty(cols,msg='Aucune donnée enregistrée'){return `<tr><td class="empty" colspan="${cols}">${msg}</td></tr>`}
+function toggleMenu(){document.getElementById('sidebar').classList.toggle('open')}
+function navigate(name){const route=routes[name];if(route&&location.pathname!==route)history.pushState({},"",route);document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===name));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===name));document.getElementById('pageTitle').textContent=({dashboard:'Tableau de bord',clients:'Clients',products:'Produits & services',labels:'Étiquettes de vente',sales:'Ventes',expenses:'Dépenses',reports:'Rapports',debts:'Créances clients',stock:'Stocks & inventaire',cash:'Trésorerie',obligations:'Obligations',closing:'Clôture de caisse',audit:'Journal d’audit',settings:'Paramètres'})[name];document.getElementById('sidebar').classList.remove('open');renderAll();scrollTo(0,0)}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>navigate(b.dataset.page));
+function openDialog(t){document.getElementById(t).showModal()}function closeDialog(t){document.getElementById(t).close()}
+function statHtml(label,value,detail){return `<div class="stat"><div class="k">${label}</div><div class="v">${value}</div><div class="detail">${detail||'&nbsp;'}</div></div>`}
+function renderDashboard(){const day=iso(),month=day.slice(0,7),today=db.sales.filter(x=>!x.cancelled&&x.date===day),ms=db.sales.filter(x=>!x.cancelled&&x.date.startsWith(month)),turn=x=>x.reduce((a,s)=>a+num(s.total),0);const received=db.sales.filter(s=>!s.cancelled).reduce((a,s)=>a+paid(s),0),debts=db.sales.filter(s=>!s.cancelled).reduce((a,s)=>a+due(s),0),ex=db.expenses.reduce((a,e)=>a+num(e.amount),0);document.getElementById('stats').innerHTML=statHtml('Ventes du jour',money(turn(today)),today.length+' vente(s)')+statHtml('Ventes du mois',money(turn(ms)),ms.length+' vente(s)')+statHtml('Total encaissé',money(received),'Toutes périodes')+statHtml('Créances clients',money(debts),'Non encaissé')+statHtml('Dépenses enregistrées',money(ex),'Toutes périodes')+statHtml('Clients',db.clients.length,'Clients enregistrés')+statHtml('Produits et services',db.products.length,'Catalogue')+statHtml('Factures impayées',db.sales.filter(x=>!x.cancelled&&due(x)>0).length,'Total ou partiellement impayées');const days=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));return d.toLocaleDateString('en-CA')});const vals=days.map(d=>turn(db.sales.filter(s=>!s.cancelled&&s.date===d))),max=Math.max(1,...vals);document.getElementById('chart').innerHTML=days.map((d,i)=>`<div class="barcol" title="${d} : ${money(vals[i])}"><div class="bar" style="height:${Math.max(2,Math.round(vals[i]/max*145))}px"></div><small>${d.slice(5)}</small></div>`).join('');document.getElementById('recentSales').innerHTML=db.sales.slice(-6).reverse().map(s=>`<tr><td>${esc(s.number)}</td><td>${esc(clientName(s.clientId))}</td><td>${money(s.total)}</td><td>${badge(s)}</td></tr>`).join('')||empty(4)}
+function renderClients(){const q=document.getElementById('clientSearch').value.toLowerCase();const list=db.clients.filter(c=>[c.name,c.phone,c.email,c.code].join(' ').toLowerCase().includes(q));document.getElementById('clientCount').textContent=list.length+' client(s)';document.getElementById('clientsTable').innerHTML=list.map(c=>{let sales=db.sales.filter(s=>!s.cancelled&&s.clientId===c.id);return `<tr><td>${esc(c.code)}</td><td><strong>${esc(c.name)}</strong><div class="hint">${esc(c.type)}</div></td><td>${esc(c.phone||'—')}</td><td>${esc(c.email||'—')}</td><td>${money(sales.reduce((a,s)=>a+s.total,0))}</td><td>${money(sales.reduce((a,s)=>a+due(s),0))}</td><td><button class="btn sm" onclick="openClient('${c.id}')">Modifier</button></td></tr>`}).join('')||empty(7)}
+function openClient(cid){const form=document.getElementById('clientForm');form.reset();const c=db.clients.find(c=>c.id===cid);document.getElementById('clientDialogTitle').textContent=c?'Modifier le client':'Nouveau client';if(c)for(const k of ['id','name','type','phone','email','address'])form.elements[k].value=c[k]||'';openDialog('clientDialog')}
+document.getElementById('clientForm').onsubmit=e=>{e.preventDefault();const f=e.target,old=db.clients.find(c=>c.id===f.elements.id.value);const c={id:old?.id||id(),code:old?.code||next('client','CLI-'),name:f.elements.name.value.trim(),type:f.elements.type.value,phone:f.elements.phone.value.trim(),email:f.elements.email.value.trim(),address:f.elements.address.value.trim()};if(!c.name)return;if(old)Object.assign(old,c);else db.clients.push(c);save();closeDialog('clientDialog')};
+function renderProducts(){const q=document.getElementById('productSearch').value.toLowerCase();const list=db.products.filter(p=>[p.name,p.code,p.category].join(' ').toLowerCase().includes(q));document.getElementById('productCount').textContent=list.length+' élément(s)';document.getElementById('productsTable').innerHTML=list.map(p=>`<tr><td>${esc(p.code)}</td><td><b>${esc(p.name)}</b><div class="hint">${esc(p.category||'Sans catégorie')}</div></td><td>${esc(p.type)}</td><td>${money(p.cost)}</td><td>${money(p.price)}</td><td>${p.type==='Service'?'—':`<span class="pill ${p.stock<=p.minStock?'warn':''}">${p.stock}</span>`}</td><td><button class="btn sm" onclick="openProduct('${p.id}')">Modifier</button></td></tr>`).join('')||empty(7)}
+function openProduct(pid){let f=document.getElementById('productForm');f.reset();const p=db.products.find(p=>p.id===pid);document.getElementById('productDialogTitle').textContent=p?'Modifier le produit':'Nouveau produit';if(p)for(const k of ['id','name','type','category','cost','price','stock','minStock'])f.elements[k].value=p[k]??'';openDialog('productDialog')}
+document.getElementById('productForm').onsubmit=e=>{e.preventDefault();const f=e.target,old=db.products.find(p=>p.id===f.elements.id.value);const p={id:old?.id||id(),code:old?.code||next('product','PRD-'),name:f.elements.name.value.trim(),type:f.elements.type.value,category:f.elements.category.value.trim(),cost:num(f.elements.cost.value),price:num(f.elements.price.value),stock:num(f.elements.stock.value),minStock:num(f.elements.minStock.value)};if(!p.name||[p.cost,p.price,p.stock,p.minStock].some(v=>!Number.isInteger(v)||v<0))return alert('Veuillez saisir des montants et quantités valides.');if(old)Object.assign(old,p);else db.products.push(p);save();closeDialog('productDialog')};
+let saleRowCounter=0;function openSale(){if(!db.products.length)return alert('Ajoutez au moins un produit ou service avant de créer une vente.');const sel=document.getElementById('saleClient');sel.innerHTML='<option value="walkin">Client comptoir</option>'+db.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');document.getElementById('saleForm').reset();document.getElementById('saleDate').value=iso();document.getElementById('saleDueDate').value='';document.getElementById('saleItems').innerHTML='';saleRowCounter=0;addSaleRow();updateCreditClientRequirement();openDialog('saleDialog')}
+function addSaleRow(){const box=document.getElementById('saleItems'),rid='sr'+(++saleRowCounter),div=document.createElement('div');div.className='saleitem';div.id=rid;div.innerHTML=`<div><label>Produit / service</label><select class="line-product" onchange="recalcSale()">${db.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)} ${p.type==='Produit'?'(stock : '+p.stock+')':''}</option>`).join('')}</select></div><div><label>Quantité</label><input class="line-qty" type="number" min="1" step="1" value="1" oninput="recalcSale()"></div><div><label>Prix unitaire</label><input class="line-price" type="number" min="0" step="1" value="${db.products[0]?.price||0}" oninput="recalcSale()"></div><div><button type="button" class="btn danger sm" onclick="document.getElementById('${rid}').remove();recalcSale()">×</button></div>`;box.appendChild(div);div.querySelector('.line-product').addEventListener('change',()=>{let p=db.products.find(p=>p.id===div.querySelector('.line-product').value);div.querySelector('.line-price').value=p.price;recalcSale()});recalcSale()}
+function getSaleLines(){return [...document.querySelectorAll('#saleItems .saleitem')].map(el=>{let p=db.products.find(p=>p.id===el.querySelector('.line-product').value);return {productId:p?.id,name:p?.name||'',type:p?.type,qty:num(el.querySelector('.line-qty').value),price:num(el.querySelector('.line-price').value),cost:num(p?.cost)}})}
+function updateCreditClientRequirement(){const sel=document.getElementById('saleClient'), hint=document.getElementById('creditClientHint');if(!sel||!hint)return;const gross=getSaleLines().reduce((a,l)=>a+l.qty*l.price,0),discount=num(document.getElementById('saleDiscount').value),paidNow=num(document.getElementById('salePaid').value);const credit=document.getElementById('saleMethod').value==='Crédit'||paidNow<Math.max(0,gross-discount);hint.style.color=credit?'#b45309':'';hint.textContent=credit?'⚠ Client enregistré obligatoire : sélectionnez son nom. Le client comptoir est interdit pour une vente à crédit.':'Client comptoir autorisé si la vente est intégralement payée.';sel.setCustomValidity(credit&&sel.value==='walkin'?'Sélectionnez un client nominatif pour cette vente à crédit.':'');}
+function recalcSale(){const sum=getSaleLines().reduce((a,l)=>a+l.qty*l.price,0),discount=num(document.getElementById('saleDiscount').value),paidNow=num(document.getElementById('salePaid').value),total=Math.max(0,sum-discount);document.getElementById('saleTotal').textContent=money(total);document.getElementById('saleRemainder').textContent='Reste à payer : '+money(Math.max(0,total-paidNow));updateCreditClientRequirement()}
+document.getElementById('saleForm').onsubmit=e=>{e.preventDefault();const lines=getSaleLines(),discount=num(document.getElementById('saleDiscount').value),paidNow=num(document.getElementById('salePaid').value),gross=lines.reduce((a,l)=>a+l.qty*l.price,0),total=gross-discount;if(!lines.length||lines.some(l=>!l.productId||!Number.isInteger(l.qty)||l.qty<=0||!Number.isInteger(l.price)||l.price<0))return alert('Vérifiez les articles, quantités et prix.');if(!Number.isInteger(discount)||discount<0||discount>gross||!Number.isInteger(paidNow)||paidNow<0||paidNow>total)return alert('Montants de remise ou de paiement invalides.');const clientId=document.getElementById('saleClient').value,method=document.getElementById('saleMethod').value,isCredit=method==='Crédit'||paidNow<total;if(isCredit&&(clientId==='walkin'||!db.clients.some(c=>c.id===clientId&&String(c.name||'').trim()))){document.getElementById('saleClient').setCustomValidity('Le nom du client est obligatoire pour une vente à crédit.');document.getElementById('saleClient').reportValidity();return;}document.getElementById('saleClient').setCustomValidity('');let counts={};for(const l of lines)if(l.type==='Produit')counts[l.productId]=(counts[l.productId]||0)+l.qty;for(const [pid,qty] of Object.entries(counts)){let p=db.products.find(x=>x.id===pid);if(p.stock<qty)return alert(`Stock insuffisant pour ${p.name} : ${p.stock} disponible(s), ${qty} demandé(s).`)}for(const [pid,qty] of Object.entries(counts))db.products.find(x=>x.id===pid).stock-=qty;const s={id:id(),number:next('sale','FAC-'+new Date().getFullYear()+'-'),date:document.getElementById('saleDate').value,clientId:document.getElementById('saleClient').value,dueDate:document.getElementById('saleDueDate').value,lines,discount,total,payments:paidNow?[{id:id(),date:iso(),amount:paidNow,method:document.getElementById('saleMethod').value}]:[],note:document.getElementById('saleNote').value.trim()};db.sales.push(s);v3Log('Vente enregistrée',s.number+' '+money(s.total));save();closeDialog('saleDialog');navigate('sales');showInvoice(s.id)};
+function renderSales(){let q=document.getElementById('saleSearch').value.toLowerCase(),list=db.sales.filter(s=>[s.number,clientName(s.clientId)].join(' ').toLowerCase().includes(q));document.getElementById('salesTable').innerHTML=list.slice().reverse().map(s=>`<tr><td><b>${esc(s.number)}</b></td><td>${esc(s.date)}</td><td>${esc(clientName(s.clientId))}</td><td>${money(s.total)}</td><td>${money(paid(s))}</td><td>${money(due(s))}</td><td>${badge(s)}</td><td><div class="actions"><button class="btn sm" onclick="showInvoice('${s.id}')">Facture</button>${due(s)>0?`<button class="btn sm primary" onclick="openPayment('${s.id}')">Encaisser</button>`:''}</div></td></tr>`).join('')||empty(8)}
+function openPayment(sid){const s=db.sales.find(x=>x.id===sid);if(!s||due(s)<=0)return;const f=document.getElementById('paymentForm');f.reset();f.elements.saleId.value=sid;f.elements.date.value=iso();f.elements.amount.max=due(s);f.elements.amount.value=due(s);document.getElementById('paymentInfo').innerHTML=`Facture <strong>${esc(s.number)}</strong> — Reste à payer : <strong>${money(due(s))}</strong>`;openDialog('paymentDialog')}
+document.getElementById('paymentForm').onsubmit=e=>{e.preventDefault();const f=e.target,s=db.sales.find(x=>x.id===f.elements.saleId.value),a=Number(f.elements.amount.value);if(!s||!Number.isInteger(a)||a<=0||a>due(s))return alert('Montant invalide ou supérieur au reste à payer.');s.payments.push({id:id(),date:f.elements.date.value,amount:a,method:f.elements.method.value});v3Log('Paiement enregistré',s.number+' '+money(a));save();closeDialog('paymentDialog')};
+function openExpense(){const f=document.getElementById('expenseForm');f.reset();f.elements.date.value=iso();openDialog('expenseDialog')}
+document.getElementById('expenseForm').onsubmit=e=>{e.preventDefault();const f=e.target,a=Number(f.elements.amount.value);if(!Number.isInteger(a)||a<=0)return alert('Montant invalide.');db.expenses.push({id:id(),code:next('expense','DEP-'),date:f.elements.date.value,label:f.elements.label.value.trim(),category:f.elements.category.value,amount:a,method:f.elements.method.value});v3Log('Dépense enregistrée',f.elements.label.value.trim()+' '+money(a));save();closeDialog('expenseDialog')};
+function renderExpenses(){document.getElementById('expensesTable').innerHTML=db.expenses.slice().reverse().map(e=>`<tr><td>${esc(e.date)}</td><td><b>${esc(e.label)}</b></td><td>${esc(e.category)}</td><td>${money(e.amount)}</td><td><span class="hint">${esc(e.code)}</span></td></tr>`).join('')||empty(5)}
+function getReport(){let from=document.getElementById('reportFrom').value||'0000-01-01',to=document.getElementById('reportTo').value||'9999-12-31';return {from,to,sales:db.sales.filter(s=>!s.cancelled&&s.date>=from&&s.date<=to),expenses:db.expenses.filter(e=>e.date>=from&&e.date<=to)}}
+function reportData(){
+ const r=getReport(),sales=r.sales,expenses=r.expenses,from=r.from,to=r.to;
+ const groups=new Map(), cats=new Map(),expGroups=new Map();let gross=0,cost=0,quantity=0,discounts=0;
+ for(const s of sales){gross+=num(s.total);discounts+=num(s.discount);const pre=(s.lines||[]).reduce((v,l)=>v+num(l.qty)*num(l.price),0);
+  for(const l of s.lines||[]){const p=db.products.find(p=>p.id===l.productId),category=p?.category||'Sans catégorie';const key=category+'\u0001'+(l.productId||l.name);const o=groups.get(key)||{category,name:l.name,sales:new Set(),clients:new Set(),quantity:0,revenue:0,cost:0};let lineAmount=num(l.qty)*num(l.price);let allocated=pre>0?num(s.discount)*lineAmount/pre:0;let revenue=lineAmount-allocated;o.sales.add(s.id);o.clients.add(s.clientId==='walkin'?s.id:s.clientId);o.quantity+=num(l.qty);o.revenue+=revenue;o.cost+=num(l.qty)*num(l.cost);quantity+=num(l.qty);cost+=num(l.qty)*num(l.cost);groups.set(key,o);
+   const c=cats.get(category)||{name:category,sales:new Set(),revenue:0,margin:0};c.sales.add(s.id);c.revenue+=revenue;c.margin+=revenue-num(l.qty)*num(l.cost);cats.set(category,c);
+  }
+ }
+ let ex=0;for(const e of expenses){ex+=num(e.amount);let c=expGroups.get(e.category)||{name:e.category,count:0,total:0};c.count++;c.total+=num(e.amount);expGroups.set(e.category,c)}
+ const paymentsPeriod=db.sales.filter(s=>!s.cancelled).flatMap(s=>(s.payments||[]).filter(p=>p.date>=from&&p.date<=to).map(p=>({...p,sale:s})));const collected=paymentsPeriod.reduce((a,p)=>a+num(p.amount),0);const collectedOnSelected=sales.reduce((a,s)=>a+(s.payments||[]).filter(p=>p.date>=from&&p.date<=to).reduce((b,p)=>b+num(p.amount),0),0);const outstanding=sales.reduce((a,s)=>a+due(s),0);const allOutstanding=db.sales.filter(s=>!s.cancelled).reduce((a,s)=>a+due(s),0);const margin=gross-cost,result=margin-ex;
+ return {...r,groups:[...groups.values()].sort((a,b)=>a.category.localeCompare(b.category)||a.name.localeCompare(b.name)),categories:[...cats.values()].sort((a,b)=>b.revenue-a.revenue),expenseGroups:[...expGroups.values()].sort((a,b)=>b.total-a.total),gross,cost,quantity,discounts,ex,margin,result,collected,collectedOnSelected,outstanding,allOutstanding,paymentsPeriod};
+}
+function reportIndicators(d){return [
+ ['Nombre total de ventes',String(d.sales.length)],['Nombre de clients distincts identifiables',String(new Set(d.sales.filter(s=>s.clientId!=='walkin').map(s=>s.clientId)).size)],['Quantité totale vendue',String(d.quantity)],['Chiffre d’affaires total',money(d.gross)],['Frais de service identifiés',money(0)+' (non suivis séparément)'],['Coût estimé des produits et services vendus',money(d.cost)],['Marge brute estimée',money(d.margin)],['Dépenses enregistrées',money(d.ex)],['Résultat de gestion estimé après dépenses',money(d.result)],['Encaissements reçus pendant la période (toutes ventes)',money(d.collected)],['Encaissements reçus sur les ventes de la période',money(d.collectedOnSelected)],['Créances encore dues sur les ventes de la période',money(d.outstanding)],['Créances totales de l’entreprise à ce jour',money(d.allOutstanding)]
+]}
+function reportTr(o){return `<tr><td>${esc(o.category)}</td><td>${esc(o.name)}</td><td>${o.sales.size}</td><td>${o.clients.size}</td><td>${o.quantity}</td><td>${money(o.revenue)}</td><td>${money(0)}</td><td>${money(o.cost)}</td><td>${money(o.revenue-o.cost)}</td></tr>`}
+function reportTotalTr(d){return `<tr class="totalrow"><td colspan="2"><b>TOTAL GLOBAL</b></td><td><b>${d.sales.length}</b></td><td><b>${new Set(d.sales.filter(s=>s.clientId!=='walkin').map(s=>s.clientId)).size}</b></td><td><b>${d.quantity}</b></td><td><b>${money(d.gross)}</b></td><td><b>${money(0)}</b></td><td><b>${money(d.cost)}</b></td><td><b>${money(d.margin)}</b></td></tr>`}
+function renderReports(){const d=reportData();document.getElementById('reportStats').innerHTML=statHtml('Chiffre d’affaires',money(d.gross),d.sales.length+' vente(s)')+statHtml('Marge brute estimée',money(d.margin),'CA – coût des ventes')+statHtml('Dépenses enregistrées',money(d.ex),d.expenses.length+' dépense(s)')+statHtml('Résultat estimé',money(d.result),'Marge – dépenses')+statHtml('Encaissements de la période',money(d.collected),'Y compris factures antérieures')+statHtml('Créances totales',money(d.allOutstanding),'Toutes les ventes');
+ document.getElementById('reportProductRows').innerHTML=d.groups.map(reportTr).join('')||empty(9,'Aucune vente sur cette période');document.getElementById('reportProductFoot').innerHTML=reportTotalTr(d);
+ document.getElementById('reportSummaryRows').innerHTML=reportIndicators(d).map(([a,b])=>`<tr><td>${esc(a)}</td><td><b>${esc(b)}</b></td></tr>`).join('');document.getElementById('reportCategoryRows').innerHTML=d.categories.map(c=>`<tr><td>${esc(c.name)}</td><td>${c.sales.size}</td><td>${money(c.revenue)}</td><td>${money(c.margin)}</td></tr>`).join('')||empty(4);
+ document.getElementById('reportExpenseRows').innerHTML=d.expenseGroups.map(c=>`<tr><td>${esc(c.name)}</td><td>${c.count}</td><td>${money(c.total)}</td></tr>`).join('')||empty(3);
+ document.getElementById('reportPaymentsRows').innerHTML=[['Encaissements de la période',d.collected],['Créances sur ventes filtrées',d.outstanding],['Créances toutes périodes',d.allOutstanding]].map(([label,v])=>`<tr><td>${esc(label)}</td><td><b>${money(v)}</b></td></tr>`).join('');
+ document.getElementById('reportRows').innerHTML=d.sales.slice().reverse().map(s=>`<tr><td>${esc(s.date)}</td><td>${esc(s.number)}</td><td>${esc(clientName(s.clientId))}</td><td>${money(s.total)}</td><td>${money(paid(s))}</td><td>${money(due(s))}</td><td>${money((s.lines||[]).reduce((a,l)=>a+num(l.qty)*num(l.cost),0))}</td></tr>`).join('')||empty(7);
+ document.getElementById('reportNarrative').textContent=reportNarrative(d);
+}
+function reportNarrative(d){return `La période étudiée comprend ${d.sales.length} vente(s), représentant ${money(d.gross)} de chiffre d’affaires pour ${d.quantity} unité(s) vendue(s). Le coût des ventes est estimé à ${money(d.cost)}, soit une marge brute de ${money(d.margin)}. Après ${money(d.ex)} de dépenses enregistrées, le résultat de gestion indicatif est de ${money(d.result)}. Les encaissements effectivement datés de la période représentent ${money(d.collected)} (y compris les règlements de ventes antérieures). Les créances restant dues sur les ventes de cette période atteignent ${money(d.outstanding)} ; les créances totales de l’entreprise atteignent ${money(d.allOutstanding)}. Ces chiffres reposent exclusivement sur les opérations saisies et n’intègrent pas les taxes, ajustements d'inventaire ni autres obligations non enregistrées.`}
+function downloadReportCSV(){const d=reportData();const rows=[['Catégorie','Produit/service','Nombre de ventes','Clients identifiables ou passages comptoir','Quantité','Chiffre d’affaires XOF','Frais de service séparés XOF','Charges estimées XOF','Bénéfice estimé XOF'],...d.groups.map(g=>[g.category,g.name,g.sales.size,g.clients.size,g.quantity,Math.round(g.revenue),0,g.cost,Math.round(g.revenue-g.cost)])];downloadFile('\ufeff'+rows.map(csvLine).join('\r\n'),'BILAN_DETAILLE_'+iso()+'.csv','text/csv;charset=utf-8')}
+function companyIdentityHTML(co){const currency=co.currency||'XOF';const cap=String(co.capital??'').trim();const moneyCapital=cap&&Number.isFinite(Number(cap))?Number(cap).toLocaleString('fr-FR')+' '+esc(currency):cap?esc(cap)+' '+esc(currency):'';const legal=[moneyCapital?'Capital social : '+moneyCapital:'',co.rccm?'RCCM : '+esc(co.rccm):''].filter(Boolean);const management=[co.taxId?'Compte Contribuable : '+esc(co.taxId):'',co.manager?'Gérant : '+esc(co.manager):''].filter(Boolean);return (legal.length?'<div>'+legal.join(' · ')+'</div>':'')+(management.length?'<div>'+management.join(' · ')+'</div>':'')}
+function invoiceHTML(s){const c=db.clients.find(x=>x.id===s.clientId),co=db.company;return `<article class="invoice"><div class="invoice-header"><div><h2>${esc(co.name)}</h2><div>${esc(co.address||'')}</div><div>${esc(co.phone||'')}</div><div>${esc(co.email||'')}</div>${companyIdentityHTML(co)}</div><div style="text-align:right"><h2>FACTURE</h2><b>${esc(s.number)}</b><div>Date : ${esc(s.date)}</div><div>Statut : ${esc(status(s))}</div></div></div><div class="invoice-details"><div><b>Facturé à</b><div>${esc(c?.name||'Client comptoir')}</div><div>${esc(c?.address||'')}</div><div>${esc(c?.phone||'')}</div><div>${esc(c?.email||'')}</div></div><div style="text-align:right"><b>Devise : ${esc(co.currency||'XOF')}</b><div>Facture commerciale non certifiée FNE</div></div></div><div class="tablewrap"><table><thead><tr><th>Désignation</th><th>Qté</th><th>Prix unitaire</th><th>Montant</th></tr></thead><tbody>${s.lines.map(l=>`<tr><td>${esc(l.name)}</td><td>${l.qty}</td><td>${money(l.price)}</td><td>${money(l.qty*l.price)}</td></tr>`).join('')}</tbody></table></div><div class="totals"><div><span>Sous-total</span><span>${money(s.total+s.discount)}</span></div><div><span>Remise</span><span>${money(s.discount)}</span></div><div><span>Total</span><span>${money(s.total)}</span></div><div><span>Déjà payé</span><span>${money(paid(s))}</span></div><div><span>Reste à payer</span><span>${money(due(s))}</span></div></div>${s.note?`<p><b>Observations :</b> ${esc(s.note)}</p>`:''}<hr style="border:0;border-top:1px solid #e2e8f0;margin-top:45px"><small>${esc(co.footer||'Merci pour votre confiance !')}</small><p><small>Document commercial généré localement. Ce document n’atteste pas d’une certification fiscale/FNE.</small></p></article>`}
+let currentInvoice=null;function showInvoice(sid){const s=db.sales.find(x=>x.id===sid);if(!s)return;currentInvoice=sid;document.getElementById('invoiceView').innerHTML=invoiceHTML(s);openDialog('invoiceDialog')}
+function printInvoice(){let s=db.sales.find(x=>x.id===currentInvoice);if(!s)return;document.getElementById('printZone').innerHTML=invoiceHTML(s);window.print()}
+function printReport(){const d=reportData(),co=db.company,now=new Date(),stamp=now.toLocaleString('fr-FR'),n='BILAN-'+now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0'),header=`<div class="report-pdf-head"><div class="report-pdf-logo">GGP<small>GESTION PRO</small></div><div class="report-pdf-company"><strong>${esc(co.name)}</strong><div>${esc(co.address||'')}</div><div>${esc(co.phone||'')} ${co.email?' · '+esc(co.email):''}</div>${companyIdentityHTML(co)}</div></div>`;
+const summary=reportIndicators(d).map(([k,v])=>`<tr><td>${esc(k)}</td><td><b>${esc(v)}</b></td></tr>`).join('');
+const category=d.categories.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.sales.size}</td><td>${money(x.revenue)}</td><td>${money(x.margin)}</td></tr>`).join('');
+const expenses=d.expenseGroups.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.count}</td><td>${money(x.total)}</td></tr>`).join('');
+const rows=d.groups.map(reportTr).join('')||empty(9,'Aucune vente sur la période');
+document.getElementById('printZone').innerHTML=`<article class="bilan-paper">${header}<div class="report-pdf-ribbon"><span>◷ &nbsp; ${esc(stamp)}</span><b>RAPPORT BILAN DÉTAILLÉ DE L’ENTREPRISE</b></div><div class="report-pdf-sub">${esc(co.name)} — Période : ${esc(d.from==='0000-01-01'?'Début':d.from)} au ${esc(d.to==='9999-12-31'?'Aujourd’hui':d.to)}<div>N° Rapport : ${n} &nbsp; | &nbsp; Édité le : ${esc(stamp)}</div></div><div class="report-pdf-section"><h3>VENTES GÉNÉRALES DES PRODUITS ET SERVICES VENDUS</h3><table class="report-pdf-table"><thead><tr><th>Catégorie</th><th>Produit / Service</th><th>Nombre de ventes</th><th>Clients servis*</th><th>Quantité totale</th><th>Chiffre d’affaires</th><th>Frais service</th><th>Charges estimées</th><th>Bénéfice estimé</th></tr></thead><tbody>${rows}${reportTotalTr(d)}</tbody></table></div><div class="report-pdf-section"><h3>RÉSUMÉ FINANCIER DE L’EXERCICE</h3><table class="report-pdf-summary"><thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead><tbody>${summary}</tbody></table></div><div class="report-pdf-section"><h3>VENTES PAR CATÉGORIE</h3><table class="report-pdf-summary"><thead><tr><th>Catégorie</th><th>Ventes</th><th>Chiffre d’affaires</th><th>Marge estimée</th></tr></thead><tbody>${category||empty(4)}</tbody></table></div><div class="report-pdf-section"><h3>DÉPENSES ENREGISTRÉES</h3><table class="report-pdf-summary"><thead><tr><th>Catégorie</th><th>Nombre</th><th>Montant</th></tr></thead><tbody>${expenses||empty(3)}</tbody></table></div><div class="report-pdf-section"><h3>ANALYSE DE LA SITUATION</h3><p>${esc(reportNarrative(d))}</p></div><p class="report-pdf-notes">* Les clients au comptoir sans fiche individuelle ne peuvent pas être distingués de façon certaine. Les frais de service ne sont pas suivis séparément dans cette version. Ce rapport est une synthèse indicative de gestion, non un bilan comptable certifié.</p><div class="report-pdf-sign"><strong>LE RESPONSABLE</strong><div>Signature et cachet</div></div></article>`;window.print()}
+function renderSettings(){let f=document.getElementById('settingsForm');for(let k of ['name','rccm','taxId','manager','address','phone','email','capital','currency','wavePaymentUrl','footer'])f.elements[k].value=db.company[k]||(k==='currency'?'XOF':'')}
+function wavePrefixIsValid(raw){if(!raw)return true;try{const u=new URL(raw);return u.protocol==='https:'&&u.hostname.toLowerCase()==='pay.wave.com'&&u.searchParams.has('amount')&&u.searchParams.get('amount')===''&&/amount=$/.test(raw)&&!u.hash}catch{return false}}
+function wavePaymentLink(balance){const prefix=String(db.company.wavePaymentUrl||'').trim();if(!wavePrefixIsValid(prefix)||!prefix)return '';const amount=Math.round(Number(balance));return Number.isSafeInteger(amount)&&amount>0?prefix+String(amount):''}
+document.getElementById('settingsForm').onsubmit=e=>{e.preventDefault();const f=e.target;const prefix=f.elements.wavePaymentUrl.value.trim();if(!wavePrefixIsValid(prefix)){alert('Le préfixe Wave doit commencer par https://pay.wave.com/ et se terminer par amount= (sans montant).');f.elements.wavePaymentUrl.focus();return;}for(let k of ['name','rccm','taxId','manager','address','phone','email','capital','currency','wavePaymentUrl','footer'])db.company[k]=f.elements[k].value.trim();save();alert('Paramètres enregistrés. Les relances Wave ajouteront automatiquement le solde restant en F CFA.')};
+function csvLine(xs){return xs.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')}
+function downloadCSV(type){let rows=[['Numéro','Date','Client','Total XOF','Payé XOF','Reste XOF','Statut'],...db.sales.map(s=>[s.number,s.date,clientName(s.clientId),s.total,paid(s),due(s),status(s)])];downloadFile('\ufeff'+rows.map(csvLine).join('\r\n'),'global_gestion_ventes.csv','text/csv;charset=utf-8')}
+function downloadFile(content,name,mime){const blob=new Blob([content],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportBackup(){downloadFile(JSON.stringify({format:'GLOBAL_GESTION_PRO',version:1,exportedAt:new Date().toISOString(),data:db},null,2),'GLOBAL_GESTION_PRO_sauvegarde_'+iso()+'.json','application/json')}
+async function importBackup(event){const f=event.target.files?.[0];event.target.value='';if(!f)return;let parsed;try{parsed=JSON.parse(await f.text())}catch{return alert('Fichier JSON illisible.')}if(parsed.format!=='GLOBAL_GESTION_PRO'||parsed.version!==1||!validDB(parsed.data))return alert('Cette sauvegarde n’est pas compatible.');if(!confirm('ATTENTION : la restauration remplacera toutes les données actuelles. Continuer ?'))return;db=parsed.data;save();navigate('dashboard');alert('Sauvegarde restaurée avec succès.')}
+function renderAll(){document.getElementById('todayDate').textContent=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});document.getElementById('companyTop').textContent=db.company.name;renderDashboard();renderClients();renderProducts();renderProductLabels();renderSales();renderExpenses();renderReports();if(!document.getElementById('settings').classList.contains('active'))renderSettings()}
+// GLOBAL GESTION PRO V3 — fonctionnalités complémentaires locales
+function v3Init(){
+ db.obligations??=[];db.stockMovements??=[];db.cashAdjustments??=[];db.closures??=[];db.audit??=[];
+ db.company.manager??='';db.company.logo??='';
+}
+v3Init();
+function v3Log(action,detail){db.audit.push({id:id(),date:new Date().toISOString(),action,detail});if(db.audit.length>5000)db.audit.shift()}
+function v3Val(x){return Number.isFinite(Number(x))?Number(x):0}
+function v3Date(x){return new Date(x+'T12:00:00')}
+function v3DaysBefore(a,b){return Math.round((v3Date(b)-v3Date(a))/86400000)}
+function v3Outstanding(){return db.sales.filter(s=>!s.cancelled&&due(s)>0).sort((a,b)=>(a.dueDate||a.date).localeCompare(b.dueDate||b.date))}
+function v3InPeriod(d,from,to){return d>=from&&d<=to}
+function v3CashRows(){const rows=[];for(const s of db.sales)for(const p of s.payments||[])rows.push({id:p.id,date:p.date,type:'Entrée',source:'Facture '+s.number,label:clientName(s.clientId),method:p.method||'Non précisé',amount:v3Val(p.amount)});for(const e of db.expenses)rows.push({id:e.id,date:e.date,type:'Sortie',source:'Dépense '+e.code,label:e.label,method:e.method||'Espèces',amount:v3Val(e.amount)});for(const x of db.cashAdjustments)rows.push({id:x.id,date:x.date,type:x.type,source:'Ajustement de caisse',label:x.label,method:x.method,amount:x.amount});return rows.sort((a,b)=>a.date.localeCompare(b.date)||a.source.localeCompare(b.source))}
+function v3Balance(rows){return rows.reduce((a,r)=>a+(r.type==='Entrée'?r.amount:-r.amount),0)}
+function v3RenderCash(){const r=v3CashRows(),from=document.getElementById('cashFrom').value||'0000-01-01',to=document.getElementById('cashTo').value||'9999-12-31',filtered=r.filter(x=>v3InPeriod(x.date,from,to));let byMethod={};for(const x of r){byMethod[x.method]??=0;byMethod[x.method]+=x.type==='Entrée'?x.amount:-x.amount}document.getElementById('cashStats').innerHTML=statHtml('Entrées période',money(filtered.filter(x=>x.type==='Entrée').reduce((a,b)=>a+b.amount,0)),'Encaissements et apports')+statHtml('Sorties période',money(filtered.filter(x=>x.type==='Sortie').reduce((a,b)=>a+b.amount,0)),'Dépenses et retraits')+statHtml('Solde période',money(v3Balance(filtered)),'Flux net de la période')+statHtml('Solde cumulé',money(v3Balance(r)),'Selon tous les mouvements saisis');document.getElementById('cashMethods').innerHTML=Object.entries(byMethod).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${money(v)}</td></tr>`).join('')||empty(2);document.getElementById('cashRows').innerHTML=filtered.slice().reverse().map(x=>`<tr><td>${esc(x.date)}</td><td><span class="pill ${x.type==='Sortie'?'bad':''}">${esc(x.type)}</span></td><td>${esc(x.source)}</td><td>${esc(x.label)}</td><td>${esc(x.method)}</td><td>${money(x.amount)}</td></tr>`).join('')||empty(6)}
+function v3RenderDebts(){const q=(document.getElementById('debtSearch').value||'').toLowerCase(),rows=v3Outstanding().filter(s=>(s.number+' '+clientName(s.clientId)).toLowerCase().includes(q)),today=iso(),overdue=rows.filter(s=>s.dueDate&&s.dueDate<today);document.getElementById('debtStats').innerHTML=statHtml('Créances totales',money(rows.reduce((a,s)=>a+due(s),0)),rows.length+' facture(s)')+statHtml('Créances échues',money(overdue.reduce((a,s)=>a+due(s),0)),overdue.length+' facture(s)')+statHtml('Acomptes reçus',money(rows.reduce((a,s)=>a+paid(s),0)),'Sur factures encore ouvertes')+statHtml('Clients débiteurs',new Set(rows.map(s=>s.clientId)).size,'Y compris comptoir');document.getElementById('debtRows').innerHTML=rows.map(s=>`<tr><td>${esc(s.number)}</td><td>${esc(clientName(s.clientId))}</td><td>${esc(s.date)}</td><td>${esc(s.dueDate||'—')}</td><td>${money(s.total)}</td><td>${money(paid(s))}</td><td><b>${money(due(s))}</b></td><td>${s.dueDate&&s.dueDate<today?'<span class="pill bad">Échue</span>':badge(s)}</td><td><button class="btn sm primary" onclick="openPayment('${s.id}')">Encaisser</button> <button class="btn sm" onclick="v3Relance('${s.id}')">WhatsApp</button></td></tr>`).join('')||empty(9)}
+function v3Relance(sid){const s=db.sales.find(s=>s.id===sid);if(!s)return;const balance=due(s);if(!(balance>0)){alert('Cette facture est déjà soldée.');return;}const c=db.clients.find(c=>c.id===s.clientId);const wave=wavePaymentLink(balance);const formattedDate=String(s.date||'').match(/^\d{4}-\d{2}-\d{2}$/)?s.date.split('-').reverse().join('/'):s.date;const msg=`Bonjour, concernant la facture « ${s.number} » du « ${formattedDate} », le solde restant est de « ${money(balance)} ». Merci de nous contacter pour le règlement. ${db.company.name}${wave?' ou Payer avec Wave en cliquant sur ce lien :\n'+wave:''}`;const phone=(c?.phone||'').replace(/\D/g,'');if(!phone){navigator.clipboard?.writeText(msg).then(()=>alert('Client sans numéro. Message de relance copié.')).catch(()=>prompt('Copiez le message :',msg));return}window.open('https://wa.me/'+(phone.startsWith('225')?phone:'225'+phone)+'?text='+encodeURIComponent(msg),'_blank','noopener')}
+
+function v3RenderObligations(){const month=document.getElementById('obMonth').value||iso().slice(0,7);let dueThis=0,paidThis=0;const rows=db.obligations.map(o=>{const applies=(!o.start||o.start.slice(0,7)<=month)&&(!o.end||o.end.slice(0,7)>=month);if(!applies)return '';const p=(o.payments||[]).filter(p=>p.month===month).reduce((a,p)=>a+p.amount,0),rest=Math.max(0,o.amount-p);dueThis+=o.amount;paidThis+=p;return `<tr><td>${esc(o.label)}</td><td>${esc(o.category)}</td><td>${money(o.amount)}</td><td>${money(p)}</td><td>${money(rest)}</td><td>${esc(o.day||'—')}</td><td><button class="btn sm primary" onclick="v3PayObligation('${o.id}')" ${rest===0?'disabled':''}>Régler</button> <button class="btn sm danger" onclick="v3RemoveObligation('${o.id}')">Archiver</button></td></tr>`}).filter(Boolean);document.getElementById('obStats').innerHTML=statHtml('Obligations du mois',money(dueThis),'Total prévu')+statHtml('Déjà réglé',money(paidThis),'Paiements enregistrés')+statHtml('Reste à régler',money(dueThis-paidThis),'Non soldé')+statHtml('Taux de couverture',dueThis?Math.round(paidThis/dueThis*100)+' %':'—','Mois sélectionné');document.getElementById('obRows').innerHTML=rows.join('')||empty(7)}
+function v3PayObligation(key){const o=db.obligations.find(x=>x.id===key),month=document.getElementById('obMonth').value||iso().slice(0,7);if(!o)return;const already=(o.payments||[]).filter(p=>p.month===month).reduce((a,p)=>a+p.amount,0),remaining=Math.max(0,o.amount-already);if(!remaining)return;const str=prompt('Montant réglé pour '+o.label+' (reste '+money(remaining)+') :',remaining);if(str===null)return;const amount=Number(str);if(!Number.isInteger(amount)||amount<1||amount>remaining)return alert('Montant invalide.');const method=prompt('Mode de paiement :','Espèces')||'Espèces';const dat=prompt('Date du règlement (AAAA-MM-JJ) :',iso());if(!/^\d{4}-\d{2}-\d{2}$/.test(dat||''))return alert('Date invalide.');o.payments??=[];o.payments.push({id:id(),date:dat,month,amount,method});db.expenses.push({id:id(),code:next('expense','DEP-'),date:dat,label:'Obligation '+o.label+' ('+month+')',category:o.category,amount,method,obligationId:o.id});v3Log('Obligation réglée',o.label+' '+money(amount));save()}
+function v3RemoveObligation(key){const o=db.obligations.find(x=>x.id===key);if(!o||!confirm('Archiver cette obligation ? Les règlements déjà enregistrés seront conservés.'))return;o.end=iso().slice(0,7)+'-01';o.archived=true;v3Log('Obligation archivée',o.label);save()}
+function v3RenderStock(){const low=db.products.filter(p=>p.type==='Produit'&&p.stock<=p.minStock),value=db.products.filter(p=>p.type==='Produit').reduce((a,p)=>a+p.stock*p.cost,0);document.getElementById('stockStats').innerHTML=statHtml('Références',db.products.filter(p=>p.type==='Produit').length,'Produits avec stock')+statHtml('Stock faible',low.length,'Au niveau du seuil')+statHtml('Valeur au coût',money(value),'Estimation sur le prix d’achat')+statHtml('Mouvements',db.stockMovements.length,'Ajustements documentés');document.getElementById('stockRows').innerHTML=db.products.filter(p=>p.type==='Produit').map(p=>`<tr><td>${esc(p.code)}</td><td>${esc(p.name)}</td><td>${money(p.cost)}</td><td>${p.stock}</td><td>${p.minStock}</td><td>${money(p.stock*p.cost)}</td><td>${p.stock<=p.minStock?'<span class="pill bad">À réapprovisionner</span>':'<span class="pill">OK</span>'}</td><td><button class="btn sm" onclick="v3AdjustStock('${p.id}')">Inventaire</button></td></tr>`).join('')||empty(8);document.getElementById('stockMovementRows').innerHTML=db.stockMovements.slice().reverse().slice(0,80).map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.product)}</td><td>${x.previous}</td><td>${x.newStock}</td><td>${esc(x.reason)}</td></tr>`).join('')||empty(5)}
+function v3AdjustStock(pid){const p=db.products.find(p=>p.id===pid);if(!p)return;const n=prompt('Quantité réelle après inventaire pour '+p.name+' :',p.stock);if(n===null)return;const amount=Number(n);if(!Number.isInteger(amount)||amount<0)return alert('Stock invalide.');const reason=prompt('Motif (inventaire, réception, casse...) :','Inventaire')?.trim();if(!reason)return alert('Un motif est obligatoire.');db.stockMovements.push({id:id(),date:iso(),productId:p.id,product:p.name,previous:p.stock,newStock:amount,reason});v3Log('Stock ajusté',p.name+' : '+p.stock+' → '+amount+' ('+reason+')');p.stock=amount;save()}
+function v3RefundSale(sid){const s=db.sales.find(s=>s.id===sid);if(!s||s.cancelled)return;if(!confirm('Annuler cette vente ? Le stock sera restitué et les encaissements enregistrés seront contrepassés par des sorties de caisse. Cette action est tracée.'))return;const reason=prompt('Motif obligatoire de l’annulation :');if(!reason?.trim())return;for(const l of s.lines||[]){const p=db.products.find(p=>p.id===l.productId);if(p&&l.type==='Produit'){const old=p.stock;p.stock+=l.qty;db.stockMovements.push({id:id(),date:iso(),productId:p.id,product:p.name,previous:old,newStock:p.stock,reason:'Annulation '+s.number})}}for(const p of s.payments||[])db.cashAdjustments.push({id:id(),date:iso(),type:'Sortie',method:p.method||'Espèces',label:'Remboursement suite à annulation '+s.number,amount:p.amount});s.cancelled=true;s.cancelReason=reason.trim();s.cancelledAt=new Date().toISOString();v3Log('Vente annulée',s.number+' : '+reason);save()}
+function v3RenderClose(){const date=document.getElementById('closeDate').value||iso(),rows=v3CashRows().filter(r=>r.date===date),incoming=rows.filter(r=>r.type==='Entrée').reduce((a,r)=>a+r.amount,0),out=rows.filter(r=>r.type==='Sortie').reduce((a,r)=>a+r.amount,0),balance=v3Balance(v3CashRows().filter(r=>r.date<=date)),last=db.closures.find(x=>x.date===date);document.getElementById('closeStats').innerHTML=statHtml('Entrées',money(incoming),'Journée sélectionnée')+statHtml('Sorties',money(out),'Journée sélectionnée')+statHtml('Flux net',money(incoming-out),'Entrées moins sorties')+statHtml('Solde cumulé',money(balance),'Selon les opérations déclarées');document.getElementById('closeRows').innerHTML=rows.map(r=>`<tr><td>${esc(r.type)}</td><td>${esc(r.label)}</td><td>${esc(r.method)}</td><td>${money(r.amount)}</td></tr>`).join('')||empty(4);document.getElementById('closeStatus').textContent=last?'Clôture enregistrée : '+new Date(last.createdAt).toLocaleString('fr-FR')+' · écart '+money(last.difference):'Aucune clôture enregistrée pour cette journée.';document.getElementById('closeRecorded').value=last?.counted??''}
+function v3SaveClose(){const date=document.getElementById('closeDate').value||iso();if(db.closures.some(x=>x.date===date))return alert('Une clôture existe déjà pour cette date : elle est conservée dans l’historique.');const counted=Number(document.getElementById('closeRecorded').value),expected=v3Balance(v3CashRows().filter(r=>r.date<=date));if(!Number.isInteger(counted)||counted<0)return alert('Montant compté invalide.');const note=prompt('Observation facultative :','')||'';db.closures.push({id:id(),date,counted,expected,difference:counted-expected,note,createdAt:new Date().toISOString()});v3Log('Clôture caisse',date+' écart '+money(counted-expected));save();alert('Clôture enregistrée. Écart : '+money(counted-expected))}
+function v3PrintClient(cid){const c=db.clients.find(c=>c.id===cid);if(!c)return;const sales=db.sales.filter(s=>!s.cancelled&&s.clientId===cid),total=sales.reduce((a,s)=>a+s.total,0),received=sales.reduce((a,s)=>a+paid(s),0);document.getElementById('printZone').innerHTML=`<article class="bilan-paper">${v3PrintHeader('RELEVÉ DE COMPTE CLIENT')}<h2>${esc(c.name)}</h2><p>${esc(c.phone||'')} · ${esc(c.address||'')}</p><table class="report-pdf-summary"><thead><tr><th>Facture</th><th>Date</th><th>Total</th><th>Payé</th><th>Reste</th></tr></thead><tbody>${sales.map(s=>`<tr><td>${esc(s.number)}</td><td>${esc(s.date)}</td><td>${money(s.total)}</td><td>${money(paid(s))}</td><td>${money(due(s))}</td></tr>`).join('')||empty(5)}<tr class="totalrow"><td colspan="2">TOTAL</td><td>${money(total)}</td><td>${money(received)}</td><td>${money(total-received)}</td></tr></tbody></table><p class="report-pdf-notes">Relevé de gestion local basé sur les transactions enregistrées.</p></article>`;window.print()}
+function v3PrintHeader(title){const co=db.company;return `<div class="report-pdf-head"><div class="report-pdf-logo">${co.logo?`<img src="${esc(co.logo)}" style="max-height:65px;max-width:90px">`:'GGP'}</div><div class="report-pdf-company"><strong>${esc(co.name)}</strong><div>${esc(co.address||'')} · ${esc(co.phone||'')}</div><div>${esc(co.email||'')}</div>${companyIdentityHTML(co)}<h2>${esc(title)}</h2><div>Édité le ${new Date().toLocaleString('fr-FR')}</div></div></div>`}
+function v3PeriodCompare(){const d=reportData(),start=d.from==='0000-01-01'?null:d.from,end=d.to==='9999-12-31'?null:d.to;if(!start||!end)return '<p class="hint">Sélectionnez une date de début et de fin pour comparer les périodes.</p>';const width=v3DaysBefore(start,end)+1;if(width<1)return '<p>Dates invalides</p>';const prevEnd=new Date(v3Date(start));prevEnd.setDate(prevEnd.getDate()-1);const prevStart=new Date(prevEnd);prevStart.setDate(prevStart.getDate()-(width-1));const fmt=d=>d.toLocaleDateString('en-CA');const olds=db.sales.filter(s=>s.date>=fmt(prevStart)&&s.date<=fmt(prevEnd)),oe=db.expenses.filter(e=>e.date>=fmt(prevStart)&&e.date<=fmt(prevEnd));const og=olds.reduce((a,s)=>a+s.total,0),oc=olds.reduce((a,s)=>a+(s.lines||[]).reduce((b,l)=>b+l.qty*l.cost,0),0),ox=oe.reduce((a,x)=>a+x.amount,0);const metrics=[['Chiffre d’affaires',d.gross,og],['Marge brute estimée',d.margin,og-oc],['Dépenses',d.ex,ox],['Résultat indicatif',d.result,og-oc-ox]];return `<p class="hint">Comparaison avec la période précédente (${fmt(prevStart)} au ${fmt(prevEnd)})</p><div class="tablewrap"><table><thead><tr><th>Indicateur</th><th>Période sélectionnée</th><th>Période précédente</th><th>Évolution</th></tr></thead><tbody>${metrics.map(([k,v,p])=>`<tr><td>${esc(k)}</td><td>${money(v)}</td><td>${money(p)}</td><td>${p?((v-p)/Math.abs(p)*100).toFixed(1)+' %':'Non comparable'}</td></tr>`).join('')}</tbody></table></div>`}
+function v3CashPrint(){const date=document.getElementById('closeDate').value||iso(),rows=v3CashRows().filter(r=>r.date===date),tot=v3Balance(rows);document.getElementById('printZone').innerHTML=`<article class="bilan-paper">${v3PrintHeader('RAPPORT DE CAISSE JOURNALIER')}<h3>${esc(date)}</h3><table class="report-pdf-summary"><thead><tr><th>Type</th><th>Référence</th><th>Mode</th><th>Montant</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.type)}</td><td>${esc(r.source)}</td><td>${esc(r.method)}</td><td>${money(r.amount)}</td></tr>`).join('')||empty(4)}<tr class="totalrow"><td colspan="3">Flux net</td><td>${money(tot)}</td></tr></tbody></table><div class="report-pdf-sign">LE RESPONSABLE<br><br>_______________________</div></article>`;window.print()}
+function v3RenderAudit(){document.getElementById('auditRows').innerHTML=db.audit.slice().reverse().slice(0,100).map(a=>`<tr><td>${esc(new Date(a.date).toLocaleString('fr-FR'))}</td><td>${esc(a.action)}</td><td>${esc(a.detail)}</td></tr>`).join('')||empty(3)}
+function v3Alerts(){const today=iso(),debt=v3Outstanding().filter(s=>s.dueDate&&s.dueDate<today),low=db.products.filter(p=>p.type==='Produit'&&p.stock<=p.minStock);let list=[...low.slice(0,5).map(p=>`Stock faible : ${p.name} (${p.stock} restant)`),...debt.slice(0,5).map(s=>`Créance échue : ${s.number} — ${money(due(s))}`)];document.getElementById('v3Alerts').innerHTML=list.length?list.map(t=>`<div class="v3-alert">⚠ ${esc(t)}</div>`).join(''):'<span class="pill">Alertes stocks et créances : aucune critique</span>'}
+function v3RenderAll(){v3Init();v3RenderCash();v3RenderDebts();v3RenderObligations();v3RenderStock();v3RenderClose();v3RenderAudit();v3Alerts();document.getElementById('v3Comparison').innerHTML=v3PeriodCompare();document.getElementById('v3FooterName').textContent=db.company.name}
+const _v3OriginalRenderAll=renderAll;
+renderAll=function(){_v3OriginalRenderAll();v3RenderAll()};
+const _v3OriginalRenderSales=renderSales;
+renderSales=function(){_v3OriginalRenderSales();for(const s of db.sales){const row=[...document.querySelectorAll('#salesTable tr')].find(x=>x.textContent.includes(s.number));if(!row)continue;if(s.cancelled){row.style.opacity='.65';row.cells[6].innerHTML='<span class="pill bad">Annulée</span>';row.cells[7].innerHTML=`<button class="btn sm" onclick="showInvoice('${s.id}')">Document</button>`}else {row.cells[7].insertAdjacentHTML('beforeend',` <button class="btn sm danger" onclick="v3RefundSale('${s.id}')">Annuler</button>`)}}};
+const _v3OriginalRenderClients=renderClients;
+renderClients=function(){_v3OriginalRenderClients();for(const c of db.clients){const row=[...document.querySelectorAll('#clientsTable tr')].find(x=>x.cells[0]?.textContent===c.code);if(row)row.cells[6].insertAdjacentHTML('beforeend',` <button class="btn sm" onclick="v3PrintClient('${c.id}')">Relevé PDF</button>`)}};
+const _v3OriginalReportNarrative=reportNarrative;
+reportNarrative=function(d){let msg=_v3OriginalReportNarrative(d);if(d.gross>0){const rate=d.margin/d.gross*100;msg+=' Le taux de marge brute estimée est de '+rate.toFixed(1).replace('.',',')+' %. ';if(d.result<0)msg+='Le résultat indicatif est négatif : examiner les charges et les prix de vente. ';else if(d.ex>d.margin*.8)msg+='Les dépenses absorbent une part importante de la marge : surveiller les charges d’exploitation. ';if(d.allOutstanding>d.gross*.3)msg+='Les créances sont significatives par rapport au chiffre d’affaires de cette période : renforcer le recouvrement. '}return msg};
+const _v3OriginalReportIndicators=reportIndicators;
+reportIndicators=function(d){const obligations=db.obligations.filter(o=>(!o.start||o.start.slice(0,7)<=d.to.slice(0,7))&&(!o.end||o.end.slice(0,7)>=d.from.slice(0,7)));return [..._v3OriginalReportIndicators(d),['Nombre de produits sous seuil',String(db.products.filter(p=>p.type==='Produit'&&p.stock<=p.minStock).length)],['Obligations mensuelles actives (information)',money(obligations.reduce((a,o)=>a+o.amount,0))],['Solde de trésorerie cumulé estimé',money(v3Balance(v3CashRows()))]]};
+const _v3OldPrintReport=printReport;
+printReport=function(){const originalPrint=window.print;window.print=()=>{};try{_v3OldPrintReport()}finally{window.print=originalPrint}const el=document.querySelector('#printZone .report-pdf-logo');if(el&&db.company.logo)el.innerHTML=`<img src="${esc(db.company.logo)}" style="width:70px;max-height:70px;object-fit:contain">`;const sign=document.querySelector('#printZone .report-pdf-sign div');if(sign&&db.company.manager)sign.textContent=db.company.manager+' — Signature et cachet';window.print()};
+const _v3OldPrintInvoice=invoiceHTML;
+invoiceHTML=function(s){let html=_v3OldPrintInvoice(s);if(db.company.logo)html=html.replace('<h2>'+esc(db.company.name)+'</h2>',`<img src="${esc(db.company.logo)}" style="max-width:90px;max-height:65px;display:block"><h2>${esc(db.company.name)}</h2>`);if(s.cancelled)html=html.replace('<h2>FACTURE</h2>','<h2>FACTURE ANNULÉE</h2>');return html};
+document.getElementById('cashAdjustmentForm').onsubmit=e=>{e.preventDefault();const f=e.target,amount=Number(f.elements.amount.value);if(!Number.isInteger(amount)||amount<1)return alert('Montant invalide.');db.cashAdjustments.push({id:id(),date:f.elements.date.value,type:f.elements.type.value,method:f.elements.method.value,label:f.elements.label.value.trim(),amount});v3Log('Mouvement de caisse',f.elements.type.value+' '+money(amount));save();f.reset();closeDialog('cashAdjustmentDialog')};
+document.getElementById('obligationForm').onsubmit=e=>{e.preventDefault();const f=e.target,amount=Number(f.elements.amount.value);if(!Number.isInteger(amount)||amount<1)return alert('Montant invalide.');db.obligations.push({id:id(),label:f.elements.label.value.trim(),category:f.elements.category.value,amount,day:Number(f.elements.day.value)||1,start:f.elements.start.value||iso().slice(0,7)+'-01',payments:[]});v3Log('Obligation créée',f.elements.label.value.trim());save();closeDialog('obligationDialog');f.reset()};
+
+
+document.getElementById('companyLogo').addEventListener('change',e=>{const f=e.target.files?.[0];e.target.value='';if(!f)return;if(!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>250000)return alert('Logo PNG/JPEG/WebP de moins de 250 Ko requis.');const r=new FileReader;r.onload=()=>{db.company.logo=String(r.result);save()};r.readAsDataURL(f)});
+document.getElementById('companyLogoRemove').onclick=()=>{db.company.logo='';save()};
+document.getElementById('cashFrom').addEventListener('change',v3RenderCash);
+document.getElementById('cashTo').addEventListener('change',v3RenderCash);
+document.getElementById('debtSearch').addEventListener('input',v3RenderDebts);
+document.getElementById('obMonth').value=iso().slice(0,7);document.getElementById('obMonth').addEventListener('change',v3RenderObligations);
+document.getElementById('closeDate').value=iso();document.getElementById('closeDate').addEventListener('change',v3RenderClose);
+const _v3OriginalImportBackup=importBackup;
+importBackup=async function(event){await _v3OriginalImportBackup(event);v3Init();renderAll()};
+
+
+/* GLOBAL GESTION PRO V3.5 — Obligations basées sur les bénéfices */
+function v35MonthActive(o,month){return (!o.start||o.start.slice(0,7)<=month)&&(!o.end||o.end.slice(0,7)>=month)}
+function v35Paid(o,month){return (o.payments||[]).filter(p=>p.month===month).reduce((a,p)=>a+num(p.amount),0)}
+function v35MonthlyData(month){
+ const sales=db.sales.filter(s=>!s.cancelled&&s.date&&s.date.slice(0,7)===month);
+ const category=new Map(),product=new Map();let gross=0,cost=0;
+ for(const sale of sales){const pre=(sale.lines||[]).reduce((a,l)=>a+num(l.qty)*num(l.price),0);gross+=num(sale.total);
+  for(const l of sale.lines||[]){const lineGross=num(l.qty)*num(l.price),allocation=pre>0?num(sale.discount)*lineGross/pre:0;
+   const margin=lineGross-allocation-num(l.qty)*num(l.cost),pid=String(l.productId||'');
+   const cat=String(l.category||db.products.find(p=>p.id===pid)?.category||'Sans catégorie').trim()||'Sans catégorie';
+   category.set(cat,(category.get(cat)||0)+margin);product.set(pid,(product.get(pid)||0)+margin);
+   cost+=num(l.qty)*num(l.cost);
+  }
+ }
+ const nonObExpenses=db.expenses.filter(e=>e.date&&e.date.slice(0,7)===month&&!e.obligationId).reduce((a,e)=>a+num(e.amount),0);
+ return {month,sales,gross,cost,margin:gross-cost,nonObExpenses,category,product,general:gross-cost-nonObExpenses};
+}
+function v35ObCalc(o,month,md=v35MonthlyData(month)){
+ const type=o.basis||'fixed';let ref=0;
+ if(type==='general')ref=md.general;
+ else if(type==='category')ref=md.category.get(o.targetCategory||'')||0;
+ else if(type==='product')ref=md.product.get(o.targetProduct||'')||0;
+ const base=Math.max(0,ref);const rate=Math.max(0,Math.min(100,Number(o.rate)||0));
+ const calculated=type==='fixed'?Math.max(0,num(o.amount)):Math.max(0,Math.round(base*rate/100));
+ const paid=v35Paid(o,month);
+ // Les règlements validés ne peuvent devenir une créance négative si les marges évoluent plus tard.
+ const amount=Math.max(calculated,paid);
+ return {type,ref,base,rate,calculated,amount,paid,rest:Math.max(0,amount-paid),overpaid:paid>calculated};
+}
+function v35BasisName(o){const type=o.basis||'fixed';if(type==='general')return 'Bénéfices généraux';if(type==='category')return 'Catégorie : '+(o.targetCategory||'Non définie');if(type==='product'){const p=db.products.find(x=>x.id===o.targetProduct);return 'Produit/service : '+(p?.name||o.targetName||'Produit archivé')}return 'Forfait fixe · '+(o.category||'Autres')}
+function v35ToggleBasis(){const form=document.getElementById('obligationForm'),type=form.elements.basis.value;
+ document.getElementById('obCategoryField').hidden=type!=='category';document.getElementById('obProductField').hidden=type!=='product';
+ document.getElementById('obAmountField').hidden=type!=='fixed';document.getElementById('obRateField').hidden=type==='fixed';
+ form.elements.amount.required=type==='fixed';form.elements.rate.required=type!=='fixed';
+ form.elements.targetCategory.required=type==='category';form.elements.targetProduct.required=type==='product';v35Preview()}
+function v35FillTargets(){const form=document.getElementById('obligationForm');const cats=[...new Set(db.products.map(p=>String(p.category||'Sans catégorie').trim()||'Sans catégorie'))].sort((a,b)=>a.localeCompare(b,'fr'));
+ const oldCat=form.elements.targetCategory.value,oldP=form.elements.targetProduct.value;
+ form.elements.targetCategory.innerHTML='<option value="">Sélectionner une catégorie</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+ form.elements.targetProduct.innerHTML='<option value="">Sélectionner un produit/service</option>'+db.products.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(p=>`<option value="${esc(p.id)}">${esc(p.name)} (${esc(p.category||'Sans catégorie')}) — ${esc(p.type)}</option>`).join('');
+ if(cats.includes(oldCat))form.elements.targetCategory.value=oldCat;
+ if(db.products.some(p=>p.id===oldP))form.elements.targetProduct.value=oldP;
+}
+function v35Preview(){const f=document.getElementById('obligationForm'),type=f.elements.basis.value,month=document.getElementById('obMonth').value||iso().slice(0,7),preview=document.getElementById('obFormulaPreview');
+ if(type==='fixed'){preview.textContent='Obligation forfaitaire : montant fixe prévu chaque mois.';return}
+ const o={basis:type,rate:f.elements.rate.value,targetCategory:f.elements.targetCategory.value,targetProduct:f.elements.targetProduct.value},c=v35ObCalc(o,month);
+ const basis=type==='general'?'bénéfice général avant obligations':type==='category'?'marge de la catégorie sélectionnée':'marge du produit ou service sélectionné';
+ preview.textContent=`Simulation pour ${month} : ${basis} ${money(c.ref)} ; base retenue ${money(c.base)} × ${c.rate.toLocaleString('fr-FR')} % = ${money(c.calculated)}. Les bénéfices négatifs ont une base de 0.`;
+}
+const _v35OpenObDialog=openDialog;
+openDialog=function(name){if(name==='obligationDialog'){v35FillTargets();v35ToggleBasis()}return _v35OpenObDialog(name)};
+for(const eventName of ['input','change'])document.getElementById('obligationForm').addEventListener(eventName,()=>v35Preview());
+document.getElementById('obligationForm').onsubmit=e=>{
+ e.preventDefault();const f=e.target,type=f.elements.basis.value,amount=Number(f.elements.amount.value),rate=Number(f.elements.rate.value);
+ if(!f.elements.label.value.trim())return alert('Saisissez un libellé pour cette obligation.');
+ if(type==='fixed'&&(!Number.isSafeInteger(amount)||amount<1))return alert('Le montant fixe doit être un entier positif.');
+ if(type!=='fixed'&&(!Number.isFinite(rate)||rate<=0||rate>100||Math.round(rate*100)!==rate*100))return alert('Saisissez un pourcentage strictement supérieur à 0 et inférieur ou égal à 100 (2 décimales maximum).');
+ if(type==='category'&&!f.elements.targetCategory.value)return alert('Choisissez la catégorie concernée.');
+ if(type==='product'&&!db.products.some(p=>p.id===f.elements.targetProduct.value))return alert('Choisissez un produit ou service existant.');
+ const product=db.products.find(p=>p.id===f.elements.targetProduct.value);
+ const o={id:id(),label:f.elements.label.value.trim(),category:f.elements.category.value,basis:type,amount:type==='fixed'?amount:0,rate:type==='fixed'?0:rate,
+  targetCategory:type==='category'?f.elements.targetCategory.value:'',targetProduct:type==='product'?f.elements.targetProduct.value:'',targetName:type==='product'?product.name:'',
+  day:Number(f.elements.day.value)||1,start:f.elements.start.value||iso().slice(0,7)+'-01',payments:[]};
+ db.obligations.push(o);v3Log('Obligation créée',o.label+' — '+v35BasisName(o));save();closeDialog('obligationDialog');f.reset();v35ToggleBasis();
+};
+v3RenderObligations=function(){const month=document.getElementById('obMonth').value||iso().slice(0,7),md=v35MonthlyData(month);let total=0,paid=0;
+ const rows=db.obligations.filter(o=>v35MonthActive(o,month)).map(o=>{const c=v35ObCalc(o,month,md);total+=c.amount;paid+=c.paid;
+ return `<tr><td><strong>${esc(o.label)}</strong><div class="hint">${esc(o.category||'')}</div></td><td>${esc(v35BasisName(o))}</td><td>${c.type==='fixed'?'—':money(c.ref)}</td><td>${c.type==='fixed'?money(c.amount):esc(c.rate.toLocaleString('fr-FR'))+' %'}</td><td>${money(c.amount)}${c.overpaid?'<div class="hint">Déjà réglé supérieur au recalcul</div>':''}</td><td>${money(c.paid)}</td><td>${money(c.rest)}</td><td>${esc(o.day||'—')}</td><td><button class="btn sm primary" onclick="v3PayObligation('${o.id}')" ${c.rest===0?'disabled':''}>Régler</button> <button class="btn sm danger" onclick="v3RemoveObligation('${o.id}')">Archiver</button></td></tr>`
+ });document.getElementById('obRows').innerHTML=rows.join('')||empty(9,'Aucune obligation active pour ce mois');
+ document.getElementById('obStats').innerHTML=statHtml('Bénéfice général avant obligations',money(md.general),'Marge brute − dépenses hors obligations')+statHtml('Obligations calculées',money(total),'Forfaits et pourcentages')+statHtml('Obligations réglées',money(paid),'Toutes les échéances du mois')+statHtml('Reste à régler',money(Math.max(0,total-paid)),'Montant non soldé')+statHtml('Résultat estimé après obligations',money(md.general-total),'Pour le mois sélectionné');
+};
+v3PayObligation=function(key){const o=db.obligations.find(x=>x.id===key),month=document.getElementById('obMonth').value||iso().slice(0,7);if(!o||!v35MonthActive(o,month))return;
+ const c=v35ObCalc(o,month);if(!c.rest)return alert('Cette obligation est déjà soldée.');
+ const str=prompt('Montant réglé pour '+o.label+' (reste '+money(c.rest)+') :',String(c.rest));if(str===null)return;
+ const amount=Number(str);if(!Number.isSafeInteger(amount)||amount<1||amount>c.rest)return alert('Montant invalide ou supérieur à l’obligation restant due.');
+ const method=prompt('Mode de paiement :','Espèces');if(method===null)return;
+ const dat=prompt('Date du règlement (AAAA-MM-JJ) :',iso());if(dat===null)return;
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(dat)||Number.isNaN(new Date(dat+'T12:00:00').getTime())||new Date(dat+'T12:00:00').toISOString().slice(0,10)!==dat)return alert('Date invalide.');
+ o.payments??=[];o.payments.push({id:id(),date:dat,month,amount,method:method.trim()||'Espèces'});
+ // L'écriture de dépense est conservée pour la trésorerie, mais exclue de l'assiette de bénéfice et du résultat (évite le double comptage).
+ db.expenses.push({id:id(),code:next('expense','DEP-'),date:dat,label:'Règlement obligation '+o.label+' ('+month+')',category:o.category,amount,method:method.trim()||'Espèces',obligationId:o.id,obligationMonth:month});
+ v3Log('Obligation réglée',o.label+' '+month+' '+money(amount));save();
+};
+// Garder les obligations historiques visibles lorsque l'utilisateur les archive au cours d'un mois ; arrêt au mois précédent.
+v3RemoveObligation=function(key){const o=db.obligations.find(x=>x.id===key);if(!o||!confirm('Archiver cette obligation pour les mois futurs ? Les mois déjà écoulés et leurs règlements seront conservés.'))return;
+ const month=document.getElementById('obMonth').value||iso().slice(0,7);o.end=month+'-01';o.archived=true;
+ v3Log('Obligation archivée',o.label+' à compter du '+month);save()};
+function v35RangeMonths(from,to){const start=from==='0000-01-01'?(db.sales.map(s=>s.date).concat(db.expenses.map(e=>e.date),db.obligations.map(o=>o.start||iso())).filter(Boolean).sort()[0]||iso()).slice(0,7):from.slice(0,7);
+ const end=to==='9999-12-31'?iso().slice(0,7):to.slice(0,7);if(!/^\d{4}-\d{2}$/.test(start)||!/^\d{4}-\d{2}$/.test(end)||start>end)return [];
+ const arr=[];let [y,m]=start.split('-').map(Number),[ye,me]=end.split('-').map(Number);for(let i=0;i<240&&y*12+m<=ye*12+me;i++){arr.push(y+'-'+String(m).padStart(2,'0'));m++;if(m===13){y++;m=1}}return arr;
+}
+function v35RangeObligations(from,to){const result=[];for(const month of v35RangeMonths(from,to)){const md=v35MonthlyData(month);for(const o of db.obligations){if(!v35MonthActive(o,month))continue;result.push({o,month,...v35ObCalc(o,month,md)})}}return result}
+const _v35OldReportData=reportData;
+reportData=function(){const d=_v35OldReportData(),list=v35RangeObligations(d.from,d.to);
+ const trackedPayments=d.expenses.filter(e=>e.obligationId).reduce((a,e)=>a+num(e.amount),0);
+ const operatingExpenses=d.ex-trackedPayments,obligationCharges=list.reduce((a,r)=>a+r.amount,0);
+ const out={...d,ex:operatingExpenses,obligations:list,obligationCharges,obligationPaid:list.reduce((a,r)=>a+r.paid,0),operatingExpenses,result:d.margin-operatingExpenses-obligationCharges};
+ // Les sorties de caisse ont bien eu lieu : elles restent dans db.expenses et dans le journal de trésorerie.
+ const expenseGroups=new Map();for(const e of d.expenses.filter(e=>!e.obligationId)){const g=expenseGroups.get(e.category)||{name:e.category,count:0,total:0};g.count++;g.total+=num(e.amount);expenseGroups.set(e.category,g)}out.expenseGroups=[...expenseGroups.values()].sort((a,b)=>b.total-a.total);return out;
+};
+const _v35PreviousIndicators=reportIndicators;
+reportIndicators=function(d){return _v35PreviousIndicators(d).filter(([k])=>!k.startsWith('Résultat de gestion estimé après dépenses')&&!k.startsWith('Obligations mensuelles actives (information)'))
+ .concat([['Dépenses d’exploitation hors obligations',money(d.operatingExpenses)],['Obligations mensuelles calculées',money(d.obligationCharges)],['Obligations déjà réglées (information)',money(d.obligationPaid)],['Obligations restant à régler',money(Math.max(0,d.obligationCharges-d.obligationPaid))],['Résultat estimé après obligations',money(d.result)]]);
+};
+const _v35RenderReports=renderReports;
+renderReports=function(){_v35RenderReports();const d=reportData();
+ document.getElementById('reportStats').innerHTML=statHtml('Chiffre d’affaires',money(d.gross),d.sales.length+' vente(s)')+statHtml('Marge brute estimée',money(d.margin),'CA − coûts directs')+statHtml('Dépenses hors obligations',money(d.operatingExpenses),'Dépenses d’exploitation')+statHtml('Obligations calculées',money(d.obligationCharges),'Tous types, mois de la période')+statHtml('Résultat après obligations',money(d.result),'Marge − dépenses − obligations')+statHtml('Reste obligations',money(Math.max(0,d.obligationCharges-d.obligationPaid)),'Non réglé');
+ document.getElementById('reportObligationsRows').innerHTML=d.obligations.map(r=>`<tr><td>${esc(r.month)}</td><td>${esc(r.o.label)}<div class="hint">${esc(v35BasisName(r.o))}</div></td><td>${r.type==='fixed'?'—':money(r.ref)}</td><td>${r.type==='fixed'?money(r.amount):esc(r.rate.toLocaleString('fr-FR'))+' %'}</td><td>${money(r.amount)}</td><td>${money(r.paid)}</td><td>${money(r.rest)}</td></tr>`).join('')||empty(7,'Aucune obligation sur la période');
+};
+const _v35Narrative=reportNarrative;
+reportNarrative=function(d){return _v35Narrative(d)+' Les obligations calculées pour les mois de la période représentent '+money(d.obligationCharges)+', dont '+money(d.obligationPaid)+' réglés. Le résultat indicatif APRÈS obligations est de '+money(d.result)+'. Les paiements d’obligations sont exclus des dépenses d’exploitation dans ce calcul afin d’éviter de les soustraire deux fois.'};
+const _v35PrintReport=printReport;
+printReport=function(){const orig=window.print;window.print=()=>{};try{_v35PrintReport()}finally{window.print=orig}
+ const d=reportData(),table=d.obligations.map(r=>`<tr><td>${esc(r.month)}</td><td>${esc(r.o.label)} — ${esc(v35BasisName(r.o))}</td><td>${r.type==='fixed'?'—':money(r.ref)}</td><td>${r.type==='fixed'?money(r.amount):esc(r.rate.toLocaleString('fr-FR'))+' %'}</td><td>${money(r.amount)}</td><td>${money(r.paid)}</td><td>${money(r.rest)}</td></tr>`).join('');
+ const html=`<div class="report-pdf-section"><h3>OBLIGATIONS MENSUELLES ET RÉSULTAT APRÈS OBLIGATIONS</h3><table class="report-pdf-summary"><thead><tr><th>Mois</th><th>Obligation / assiette</th><th>Bénéfice de référence</th><th>Taux / forfait</th><th>Calculé</th><th>Réglé</th><th>Reste</th></tr></thead><tbody>${table||empty(7)}</tbody></table><p><b>Obligations calculées : ${money(d.obligationCharges)} · Réglées : ${money(d.obligationPaid)} · Résultat estimé après obligations : ${money(d.result)}</b></p></div>`;
+ const sign=document.querySelector('#printZone .report-pdf-sign');if(sign)sign.insertAdjacentHTML('beforebegin',html);
+ window.print();
+};
+const _v35OldAlerts=v3Alerts;
+v3Alerts=function(){_v35OldAlerts();const m=iso().slice(0,7);let list=db.obligations.filter(o=>v35MonthActive(o,m)).map(o=>({o,c:v35ObCalc(o,m)})).filter(x=>x.c.rest>0).slice(0,3);
+ const area=document.getElementById('v3Alerts');if(list.length)area.insertAdjacentHTML('beforeend',list.map(x=>`<div class="v3-alert">⚠ Obligation à régler : ${esc(x.o.label)} — ${money(x.c.rest)}</div>`).join(''));
+};
+// Interdire les dépôts de sauvegardes incohérents sur la nouvelle structure : les anciennes obligations sans champ basis restent des forfaits.
+
+/* QRCode generator © 2009 Kazuhiko Arase, licence MIT; intégré pour fonctionnement hors ligne. */
+const ProductLabelQR=(function(){const modules={'QRMode':function(require,module,exports){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+},'QRErrorCorrectLevel':function(require,module,exports){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+},'QRMaskPattern':function(require,module,exports){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+},'QRMath':function(require,module,exports){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+},'QRBitBuffer':function(require,module,exports){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+},'QR8bitByte':function(require,module,exports){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+},'QRPolynomial':function(require,module,exports){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+},'QRRSBlock':function(require,module,exports){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+},'QRUtil':function(require,module,exports){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+},'index':function(require,module,exports){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+}};const cache={};function require(name){const k=name.replace(/^\.\//,'');if(!cache[k]){const module={exports:{}};cache[k]=module;modules[k](require,module,module.exports)}return cache[k].exports}return require('index')})();
+
+// Sélection persistante pendant cette session de page ; les impressions ne modifient aucune vente ni stock.
+const selectedProductLabels=new Set();
+function productLabelSvg(code){try{const qr=new ProductLabelQR(0,1);qr.addData('GGP:'+String(code));qr.make();const n=qr.getModuleCount(),m=2;let parts=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+(n+2*m)+' '+(n+2*m)+'" shape-rendering="crispEdges" role="img" aria-label="Code QR produit '+esc(code)+'"><rect width="100%" height="100%" fill="white"/>'];for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(qr.isDark(r,c))parts.push('<rect x="'+(c+m)+'" y="'+(r+m)+'" width="1" height="1" fill="black"/>');return parts.join('')+'</svg>'}catch(e){return '<span class="hint">QR indisponible</span>'}}
+function productLabelHTML(p){return '<div class="product-label"><div class="label-name">'+esc(p.name)+'</div><div class="label-qr">'+productLabelSvg(p.code||p.id)+'</div><div class="label-price">'+money(p.price)+'</div><div class="label-ref">'+esc(p.code||'')+'</div></div>'}
+function selectedLabelProducts(){return db.products.filter(p=>selectedProductLabels.has(p.id))}
+function toggleProductLabel(pid,checked){if(checked)selectedProductLabels.add(pid);else selectedProductLabels.delete(pid);renderProductLabels()}
+function toggleAllProductLabels(checked){const q=(document.getElementById('labelsSearch')?.value||'').trim().toLowerCase();db.products.filter(p=>[p.name,p.code,p.category,p.type].join(' ').toLowerCase().includes(q)).forEach(p=>checked?selectedProductLabels.add(p.id):selectedProductLabels.delete(p.id));renderProductLabels()}
+function renderProductLabels(){const chooser=document.getElementById('labelsChooser');if(!chooser)return;const ids=new Set(db.products.map(p=>p.id));for(const pid of selectedProductLabels)if(!ids.has(pid))selectedProductLabels.delete(pid);const q=document.getElementById('labelsSearch').value.trim().toLowerCase();const candidates=db.products.filter(p=>[p.name,p.code,p.category,p.type].join(' ').toLowerCase().includes(q));chooser.innerHTML=candidates.map(p=>'<label class="label-choice"><input type="checkbox" '+(selectedProductLabels.has(p.id)?'checked':'')+' onchange="toggleProductLabel(&quot;'+esc(p.id)+'&quot;,this.checked)"><span style="min-width:0;flex:1"><strong>'+esc(p.name)+'</strong><span class="hint">'+esc(p.code)+' · '+money(p.price)+'</span></span></label>').join('')||'<p class="hint">Aucun produit ou service correspondant.</p>';const n=selectedProductLabels.size;document.getElementById('labelsCount').textContent=n+' sélectionnée(s)';document.getElementById('labelsSelectAll').checked=candidates.length>0&&candidates.every(p=>selectedProductLabels.has(p.id));document.getElementById('labelsSelectAll').indeterminate=candidates.some(p=>selectedProductLabels.has(p.id))&&!candidates.every(p=>selectedProductLabels.has(p.id));const arr=selectedLabelProducts();document.getElementById('labelsPagesNote').textContent=n+' étiquette(s) · '+Math.ceil(n/20)+' page(s) A4 · 20 étiquettes maximum par page';document.getElementById('labelsPreview').innerHTML=arr.length?Array.from({length:Math.ceil(arr.length/20)},(_,i)=>'<div class="label-preview-sheet"><div class="label-sheet-meta">Page '+(i+1)+' / '+Math.ceil(arr.length/20)+'</div><div class="label-grid">'+arr.slice(i*20,i*20+20).map(productLabelHTML).join('')+'</div></div>').join(''):'<p class="hint">Cochez des produits pour afficher l’aperçu des étiquettes.</p>'}
+function printProductLabels(){const arr=selectedLabelProducts();if(!arr.length)return alert('Veuillez cocher au moins un produit ou service à imprimer.');document.getElementById('printZone').innerHTML='<div class="label-print">'+Array.from({length:Math.ceil(arr.length/20)},(_,i)=>'<section class="label-a4"><div class="label-grid">'+arr.slice(i*20,i*20+20).map(productLabelHTML).join('')+'</div></section>').join('')+'</div>';window.print()}
+
+(async()=>{const r=await fetch('/api/load');if(!r.ok){location.href='/connexion';return}const x=await r.json();csrf=x.csrf;version=x.version;if(x.data&&validDB(x.data))db=x.data;else db.company.name=x.shop;renderAll();navigate(Object.keys(routes).find(k=>routes[k]===location.pathname)||'dashboard');window.onpopstate=()=>navigate(Object.keys(routes).find(k=>routes[k]===location.pathname)||'dashboard');})().catch(e=>alert(e.message));
+</script></body></html>
