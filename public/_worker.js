@@ -4,7 +4,7 @@ const hex=b=>Array.from(new Uint8Array(b),v=>v.toString(16).padStart(2,'0')).joi
 async function hash(p,s){const k=await crypto.subtle.importKey('raw',enc.encode(p),'PBKDF2',false,['deriveBits']);return hex(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:enc.encode(s),iterations:100000},k,256));}
 const json=(x,status=200,headers={})=>Response.json(x,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}});
 export default {async fetch(r,e){const u=new URL(r.url),p=u.pathname,D=e.DB;const q=(s,...a)=>D.prepare(s).bind(...a),one=(s,...a)=>q(s,...a).first(),all=async(s,...a)=>(await q(s,...a).all()).results;const fail=(m,s=400)=>json({error:m},s);try{
-if(!p.startsWith('/api/')){if(p==='/gestion.html')return Response.redirect(u.origin+'/gestion/dashboard');if(p.startsWith('/gestion/'))return e.ASSETS.fetch(new Request(u.origin+'/gestion.html'));return e.ASSETS.fetch(new Request(u.origin+(p.includes('.')?p:'/index.html')));}
+if(!p.startsWith('/api/')){if(p==='/gestion.html'||p==='/gestion'||p==='/gestion/')return Response.redirect(u.origin+'/gestion/parametres',302);if(p.startsWith('/gestion/'))return e.ASSETS.fetch(new Request(u.origin+'/gestion.html'));return e.ASSETS.fetch(new Request(u.origin+(p.includes('.')?p:'/index.html')));}
 if(!D || typeof D.prepare!=='function')return fail('Base D1 non configurée. Contactez le support (DB_BINDING).',503);
 const method=r.method; if(method==='POST'&&r.headers.get('Origin')!==u.origin)return fail('Origine refusée',403);
 let b={};if(method==='POST'){const t=await r.text();if(t.length>1800000)return fail('Données trop volumineuses',413);b=JSON.parse(t);}

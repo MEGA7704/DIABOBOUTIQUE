@@ -24,3 +24,6 @@ Les deux accès publics ouvrent une fenêtre modale avec connexion et inscriptio
 
 ## V5 — Inspiration GLOBAL MARKET
 Catalogue sans grande bannière, catégories rapides, filtres boutique/type, 16 offres par page, deux colonnes mobiles, partage WhatsApp. Design de gestion harmonisé. Aucun changement de schéma, de Worker, de tarifs ou de bindings. Les fonctionnalités non finalisées de V4 restent non finalisées.
+
+### V5.1
+Les administrateurs arrivent directement sur `/gestion/parametres`. Les anciens liens `/espace` redirigent les boutiques vers les paramètres après contrôle du rôle. Publication, abonnement et déconnexion sont conservés. Aucun changement SQL.
