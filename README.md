@@ -15,3 +15,9 @@ Version intermédiaire, à valider avant exploitation commerciale. Les modules H
 
 ## Identité et navigation
 Le projet est nommé `diabo-boutique`. Le menu public comporte Accueil et les deux accès de connexion/inscription. Les identifiants techniques des anciennes sauvegardes JSON sont conservés pour la compatibilité. Si vous mettez à jour un projet Pages existant, conservez son nom dans Cloudflare ou créez un nouveau projet nommé diabo-boutique.
+
+## Correction inscription V4.1
+Dans Cloudflare > D1 > mirabelle_d1 > Console, exécuter le contenu de migrations/0001_initial.sql si les tables n'existent pas. Ce script est idempotent pour les tables compatibles et ne supprime pas les données. Si DB_SCHEMA persiste, vérifier les colonnes via PRAGMA table_info(gg_users); et consulter les logs Pages Functions. Ne pas supprimer les tables. Vérifier le binding DB dans l'environnement Production (et Preview si utilisé). Redéployer. Les inscriptions utilisent des colonnes explicites et une transaction D1. Les erreurs de doublon, de liaison et de schéma ont des messages distincts.
+
+## V4.2 — Interface pleine largeur
+Les deux accès publics ouvrent une fenêtre modale avec connexion et inscription. Les URL directes restent accessibles. Aucun changement des migrations ni des bindings.
