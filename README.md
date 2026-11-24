@@ -26,4 +26,4 @@ Les deux accès publics ouvrent une fenêtre modale avec connexion et inscriptio
 Catalogue sans grande bannière, catégories rapides, filtres boutique/type, 16 offres par page, deux colonnes mobiles, partage WhatsApp. Design de gestion harmonisé. Aucun changement de schéma, de Worker, de tarifs ou de bindings. Les fonctionnalités non finalisées de V4 restent non finalisées.
 
 ### V5.1
-Les administrateurs arrivent directement sur `/gestion/parametres`. Les anciens liens `/espace` redirigent les boutiques vers les paramètres après contrôle du rôle. Publication, abonnement et déconnexion sont conservés. Aucun changement SQL.
+V5.2 : les administrateurs arrivent sur `/gestion/dashboard`. La publication est intégrée au formulaire Produits & services. Les publications existantes sont récupérées à la lecture. Les images JPEG compressées sont stockées dans D1, sans R2 ; limite par image 110 000 caractères, limite globale des données 1,7 million de caractères. Les nouvelles fiches sont masquées par défaut. Aucun changement SQL. Recharger les anciens onglets après déploiement.
