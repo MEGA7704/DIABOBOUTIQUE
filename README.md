@@ -21,3 +21,6 @@ Dans Cloudflare > D1 > mirabelle_d1 > Console, exécuter le contenu de migration
 
 ## V4.2 — Interface pleine largeur
 Les deux accès publics ouvrent une fenêtre modale avec connexion et inscription. Les URL directes restent accessibles. Aucun changement des migrations ni des bindings.
+
+## V5 — Inspiration GLOBAL MARKET
+Catalogue sans grande bannière, catégories rapides, filtres boutique/type, 16 offres par page, deux colonnes mobiles, partage WhatsApp. Design de gestion harmonisé. Aucun changement de schéma, de Worker, de tarifs ou de bindings. Les fonctionnalités non finalisées de V4 restent non finalisées.
