@@ -1,1 +1,15 @@
-{"name":"diabo-boutique","version":"4.0.0","private":true,"type":"module","scripts":{"dev":"wrangler pages dev public","deploy":"wrangler pages deploy public","migrate":"wrangler d1 migrations apply mirabelle_d1 --remote","test":"node --check public/_worker.js && node --check public/app.js"},"devDependencies":{"wrangler":"^4.0.0"}}
+{
+  "name": "diabo-boutique",
+  "version": "5.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public",
+    "migrate": "wrangler d1 migrations apply mirabelle_d1 --remote",
+    "test": "node --check public/_worker.js && node --check public/app.js && node tests/orders.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
