@@ -97,3 +97,6 @@ Les frais facturés au client sont inclus dans le total de facture et neutralis�
 
 ## V7.0
 Champ Frais de service (FCFA) affiché uniquement pour le type Service, enregistré dans le catalogue interne, valeur par défaut 0. Aucun changement des calculs de vente ou de bénéfice. Aucune migration SQL.
+
+## V7.1 — Catégories et modes de facturation des services
+35 catégories prédéfinies et 11 modes, avec Autre dans chaque liste. Les valeurs personnalisées sont conservées dans les données D1 propres à chaque boutique. Le mode de facturation est descriptif, sans calcul automatique de durée, surface ou commission. Aucune migration SQL.
