@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS gg_delivery_config (shop TEXT PRIMARY KEY, config TEXT NOT NULL);
