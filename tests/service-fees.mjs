@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const html=fs.readFileSync(new URL('../public/gestion.html',import.meta.url),'utf8');
+const data={products:[{id:'s',name:'Service',type:'Service',price:10000,cost:7000,marginRate:30,serviceFee:500,category:'Assistance'}],sales:[],expenses:[]};
+const num=n=>Number(n)||0,paid=s=>(s.payments||[]).reduce((a,p)=>a+p.amount,0);
+const ctx=vm.createContext({db:data,num,money:x=>Math.round(x)+' F',due:s=>s.total-paid(s),document:{querySelectorAll:()=>[{querySelector:k=>({value:({'.line-product':'s','.line-qty':'2','.line-price':'10000'})[k]})}],getElementById:()=>({value:''})}});
+vm.runInContext(html.slice(html.indexOf('function getSaleLines(){'),html.indexOf('function updateCreditClientRequirement()')),ctx);
+const lines=vm.runInContext('getSaleLines()',ctx);
+assert.equal(lines[0].price,10500);assert.equal(lines[0].cost,7000);assert.equal(lines[0].serviceFee,500);
+const sale={id:'s1',date:'2026-11-25',clientId:'walkin',lines,discount:0,total:21000,payments:[{date:'2026-11-25',amount:21000}]};
+data.sales.push(sale,{id:'old',date:'2026-11-25',clientId:'walkin',onlineOrder:true,lines:[{productId:'s',type:'Service',name:'Service',qty:1,price:10000,cost:7000},{productId:'delivery-fee',type:'Service',name:'Livraison',qty:1,price:500,cost:0}],discount:0,total:10500,payments:[]});
+vm.runInContext(html.slice(html.indexOf('function getReport(){'),html.indexOf('function reportTr(')),ctx);
+const d=vm.runInContext('reportData()',ctx);assert.equal(d.serviceFees,1000);assert.equal(d.collectedServiceFees,1000);assert.equal(d.gross,31500);assert.equal(d.cost,21500);assert.equal(d.margin,10000);assert.equal(d.groups.find(g=>g.category==='Assistance').serviceFees,1000);assert.equal(d.groups.find(g=>g.category==='Livraison / expédition').serviceFees,0);
+assert.ok(vm.runInContext('reportIndicators(reportData())',ctx).some(x=>x[0].startsWith('Frais de service facturés')&&x[1]==='1000 F'));
+sale.discount=2100;sale.total=18900;assert.equal(vm.runInContext('reportData().serviceFees',ctx),900);
+console.log('OK — vente manuelle, frais dans résumé et marge, remise, anciennes ventes et livraison.');

@@ -33,3 +33,28 @@ const feeSale=(await ok('load',undefined,a)).data.sales.find(s=>s.id===ao.id);
 assert.equal(feeSale.lines.find(l=>l.productId==='delivery-fee').cost,100);
 assert.equal(feeSale.total-feeSale.lines.reduce((sum,l)=>sum+l.qty*l.cost,0),600);
 console.log('Frais de livraison neutralisés dans la marge.');
+
+// Une prestation de 10 000 F + 500 F de frais par unité : les frais ne supportent aucun coût direct.
+let serviceLoad=await ok('load',undefined,a);
+serviceLoad.data.products.push({id:'svc1',name:'Assistance',type:'Service',price:10000,cost:7000,marginRate:30,serviceFee:500,billingMode:'Au forfait',stock:0,published:true});
+await ok('save',{version:serviceLoad.version,data:serviceLoad.data},a);
+const svcId=a.shop.id+'-svc1';
+assert.equal((await ok('catalog')).find(x=>x.id===svcId).price,10500);
+let state2=await ok('client/state',undefined,c2);
+await ok('client/update',{kind:'delivery',name:'Client 2',phone:'0700000000',location:'Diabo',address:'Marché',version:state2.version},c2);
+state2=await ok('client/state',undefined,c2);
+await ok('client/update',{kind:'cart',id:svcId,qty:2,version:state2.version},c2);
+state2=await ok('client/state',undefined,c2);
+const svcPayload={version:state2.version,prices:{[svcId]:10500},choices:{[a.shop.id]:{mode:'pickup'}},totals:{[a.shop.id]:21000}};
+await ok('client/checkout',svcPayload,c2);
+const svcOrder=(await ok('client/orders',undefined,c2))[0];
+assert.equal(svcOrder.lines[0].serviceFee,500);
+// Modification du tarif après commande : le montant des frais convenus reste figé.
+serviceLoad=await ok('load',undefined,a);serviceLoad.data.products.find(x=>x.id==='svc1').serviceFee=900;await ok('save',{version:serviceLoad.version,data:serviceLoad.data},a);
+await ok('shop/orders/status',{id:svcOrder.id,status:'accepted'},a);
+const svcPay={id:svcOrder.id,method:'Espèces',reference:'SERVICE-001',amount:21000};await ok('client/orders/declare',svcPay,c2);
+const svcDecl=(await ok('shop/orders',undefined,a)).find(x=>x.id===svcOrder.id).declaration;
+await ok('shop/orders/pay',{...svcPay,declarationId:svcDecl.id},a);
+const svcSale=(await ok('load',undefined,a)).data.sales.find(x=>x.id===svcOrder.id);
+assert.equal(svcSale.lines[0].serviceFee,500);assert.equal(svcSale.lines[0].cost,7000);assert.equal(svcSale.total,21000);assert.equal(svcSale.total-svcSale.lines[0].qty*svcSale.lines[0].cost,7000);
+console.log('OK — frais de service publics, facturation, marge et conservation du tarif commandé.');
