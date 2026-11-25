@@ -72,3 +72,7 @@ Commandes reçues : liste compacte et détail en fenêtre modale, actions exista
 
 ## V6.3 — Confirmation obligatoire de la déclaration client
 Aucun encaissement de commande sans déclaration préalable. Référence, mode, montant et identifiant de déclaration contrôlés côté serveur. En cas de non-réception, rejeter la déclaration pour permettre au client de la renouveler. Aucune migration supplémentaire.
+
+
+## V6.4 — Catalogue public
+Cartes compactes, images non recadrées, filtres regroupés et pagination masquée pour une seule page. Aucune migration.
