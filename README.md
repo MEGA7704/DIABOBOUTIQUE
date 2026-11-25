@@ -100,3 +100,7 @@ Champ Frais de service (FCFA) affiché uniquement pour le type Service, enregist
 
 ## V7.1 — Catégories et modes de facturation des services
 35 catégories prédéfinies et 11 modes, avec Autre dans chaque liste. Les valeurs personnalisées sont conservées dans les données D1 propres à chaque boutique. Le mode de facturation est descriptif, sans calcul automatique de durée, surface ou commission. Aucune migration SQL.
+
+## V7.2 — Formulaire de tarification des services
+
+Stock et seuil d'alerte réservés aux produits. Prix libellé selon le mode, marge brute en pourcentage du prix de vente (coût estimé = prix × (1 − marge/100), arrondi au FCFA), taux général pour le mode au pourcentage. Sur devis : aucun champ de tarification dans la fiche. Frais de service conservés pour les modes à prix fixe, non ajoutés automatiquement au prix. Les modes variables (sur devis/au pourcentage) restent internes afin d'éviter des commandes publiques à 0 F ; le prix réel est saisi manuellement à la vente, ainsi que le coût réel pour un devis. À l'année : prix mensuel selon la demande, pas de multiplication automatique par 12. Pas de calcul automatique de l'assiette du pourcentage. Les anciennes ventes ne sont pas modifiées. Aucune migration SQL.

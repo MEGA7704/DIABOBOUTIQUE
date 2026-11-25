@@ -1,13 +1,13 @@
 {
   "name": "diabo-boutique",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "wrangler pages dev public",
     "deploy": "wrangler pages deploy public",
     "migrate": "wrangler d1 migrations apply mirabelle_d1 --remote",
-    "test": "node --check public/_worker.js && node --check public/app.js && node tests/orders.mjs"
+    "test": "node --check public/_worker.js && node --check public/app.js && node tests/orders.mjs && node tests/service-pricing.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
