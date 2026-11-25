@@ -60,3 +60,9 @@ Liste unique, fenêtre de commande, adresse par boutique et devis serveur. Aucun
 - Refonte visuelle de la section Mon panier.
 - Nouveau pop-up de commande plus professionnel.
 - Présentation en cartes et résumé amélioré.
+
+
+## Mise à jour V6.1
+- Commandes en petites bandes cliquables.
+- Détail des commandes en pop-up.
+- Bouton « Régler mon achat » déplacé dans le pop-up.
