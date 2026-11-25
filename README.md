@@ -76,3 +76,6 @@ Aucun encaissement de commande sans déclaration préalable. Référence, mode, 
 
 ## V6.4 — Catalogue public
 Cartes compactes, images non recadrées, filtres regroupés et pagination masquée pour une seule page. Aucune migration.
+
+## V6.5
+Catalogue public simplifié : suppression du titre, du sous-titre, du compteur, des catégories rapides et du filtre localisation.
