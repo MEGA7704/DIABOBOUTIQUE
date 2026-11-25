@@ -79,3 +79,9 @@ Cartes compactes, images non recadrées, filtres regroupés et pagination masqu�
 
 ## V6.5
 Catalogue public simplifié : suppression du titre, du sous-titre, du compteur, des catégories rapides et du filtre localisation.
+
+## V6.6 — Administration
+Tableau des boutiques, plans, prolongations, archivage réversible, sessions et demandes de paiement. Aucune migration supplémentaire.
+
+## V6.7 — Récupération de compte
+Exécuter migrations/0005_password_recovery.sql avant déploiement. Demandes clients et boutiques, validation manuelle de l’identité par le Super Admin, code aléatoire à usage unique valable 30 minutes, transmis manuellement par canal vérifié. Aucun envoi automatique.

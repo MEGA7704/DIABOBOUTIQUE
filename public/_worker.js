@@ -34,6 +34,21 @@ if(client)statements.push(q('INSERT INTO gg_client_state(uid,profile) VALUES(?,?
 try{await D.batch(statements);}catch(err){if(/unique constraint failed: gg_users.email/i.test(String(err)))return fail('Cette adresse e-mail est déjà utilisée. Connectez-vous.',409);throw err;}
 return json({ok:true},201);}
 if(p==='/api/catalog'){const rows=await all("SELECT p.*,s.name shop_name,s.location,s.phone FROM gg_public p JOIN gg_shops s ON s.id=p.shop WHERE s.status='active' AND (s.expiry IS NULL OR s.expiry>?)",now());return json(rows);}
+if(p==='/api/recovery/request'&&method==='POST'){
+ const email=String(b.email||'').trim().toLowerCase();if(email.length>254||!email.includes('@'))return fail('Adresse e-mail invalide');
+ const key='recovery:'+ (r.headers.get('CF-Connecting-IP')||'local');const stamp=now();
+ await q('INSERT INTO gg_limits VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET n=CASE WHEN until<=? THEN 1 ELSE n+1 END,until=CASE WHEN until<=? THEN excluded.until ELSE until END',key,stamp+900000,stamp,stamp).run();
+ if((await one('SELECT n FROM gg_limits WHERE key=?',key)).n>5)return fail('Réessayez dans 15 minutes',429);
+ const user=await one("SELECT id FROM gg_users WHERE email=? AND role IN ('ADMIN','CLIENT')",email);
+ if(user)await q("INSERT INTO gg_password_recovery(id,uid,created,status) VALUES(?,?,?,'pending') ON CONFLICT(uid) DO UPDATE SET id=excluded.id,created=excluded.created,status='pending',code_hash=NULL,expiry=NULL,handled=NULL WHERE status IN ('used','rejected') OR (status='issued' AND expiry<=?)",uuid(),user.id,stamp,stamp).run();
+ return json({ok:true});}
+if(p==='/api/recovery/redeem'&&method==='POST'){
+ const email=String(b.email||'').trim().toLowerCase(),code=String(b.code||'').trim().toLowerCase(),pw=b.password;
+ if(email.length>254||! /^[a-f0-9]{32}$/.test(code)||typeof pw!=='string'||pw.length<10||pw.length>256)return fail('Code ou mot de passe invalide');
+ const digest=hex(await crypto.subtle.digest('SHA-256',enc.encode(code)));
+ const x=await one("SELECT a.id,a.uid FROM gg_password_recovery a JOIN gg_users u ON u.id=a.uid WHERE u.email=? AND u.role IN ('ADMIN','CLIENT') AND a.status='issued' AND a.code_hash=? AND a.expiry>?",email,digest,now());if(!x)return fail('Code invalide ou expiré',400);
+ const salt=uuid(),h=await hash(pw,salt),guard="EXISTS(SELECT 1 FROM gg_password_recovery WHERE id=? AND status='issued' AND code_hash=? AND expiry>?)",stamp=now();
+ const result=await D.batch([q('UPDATE gg_users SET hash=?,salt=?,force=0 WHERE id=? AND '+guard,h,salt,x.uid,x.id,digest,stamp),q('DELETE FROM gg_sessions WHERE uid=? AND '+guard,x.uid,x.id,digest,stamp),q("UPDATE gg_password_recovery SET status='used',code_hash=NULL,expiry=NULL,handled=? WHERE id=? AND status='issued' AND code_hash=? AND expiry>?",stamp,x.id,digest,stamp)]);if(!result[0].meta.changes)return fail('Code déjà utilisé ou expiré');return json({ok:true});}
 if(!s)return fail('Connexion requise',401);if(method==='POST'&&r.headers.get('X-CSRF')!==s.csrf)return fail('CSRF invalide',403);
 if(p==='/api/me')return json({role:s.role,csrf:s.csrf,force:s.force,shop:s.shop?await one('SELECT * FROM gg_shops WHERE id=?',s.shop):null});
 if(p==='/api/logout'&&method==='POST'){await q('DELETE FROM gg_sessions WHERE id=?',token).run();return json({ok:true},200,{'Set-Cookie':'gg=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});}
@@ -124,9 +139,22 @@ if(p.startsWith('/api/shop/orders')){
 }
 
 if(s.role==='SUPER_ADMIN'){
-if(p==='/api/admin')return json({shops:await all('SELECT * FROM gg_shops'),requests:await all('SELECT * FROM gg_requests ORDER BY created DESC'),audit:await all('SELECT * FROM gg_audit ORDER BY created DESC LIMIT 100')});
-if(p==='/api/admin/status'&&method==='POST'){if(!['active','suspended','archived'].includes(b.status))return fail('Statut invalide');await q('UPDATE gg_shops SET status=? WHERE id=?',b.status,b.shop).run();await audit('status:'+b.status,s);return json({ok:true});}
-if(p==='/api/admin/approve'&&method==='POST'){const x=await one("SELECT * FROM gg_requests WHERE id=? AND status='pending'",b.id);if(!x)return fail('Demande introuvable');const days=plans[x.plan][1];await D.batch([q("UPDATE gg_requests SET status='approved' WHERE id=? AND status='pending'",x.id),q('UPDATE gg_shops SET plan=?,expiry=? WHERE id=?',x.plan,days?now()+days*86400000:null,x.shop)]);await audit('subscription approved',s);return json({ok:true});}}
+if(p==='/api/admin/recovery'&&method==='GET')return json(await all("SELECT a.id,a.created,a.status,a.expiry,a.handled,u.email,u.role,g.name shop_name,g.phone shop_phone FROM gg_password_recovery a JOIN gg_users u ON u.id=a.uid LEFT JOIN gg_shops g ON g.id=u.shop WHERE u.role IN ('ADMIN','CLIENT') ORDER BY a.created DESC"));
+if(p==='/api/admin/recovery/issue'&&method==='POST'){
+ const code=uuid().replaceAll('-',''),digest=hex(await crypto.subtle.digest('SHA-256',enc.encode(code))),stamp=now();
+ const result=await q("UPDATE gg_password_recovery SET status='issued',code_hash=?,expiry=?,handled=? WHERE id=? AND status IN ('pending','issued') AND uid IN (SELECT id FROM gg_users WHERE role IN ('ADMIN','CLIENT'))",digest,stamp+1800000,stamp,b.id).run();if(!result.meta.changes)return fail('Demande indisponible',409);await audit('recovery code issued',s);return json({code,expiry:stamp+1800000});}
+if(p==='/api/admin/recovery/reject'&&method==='POST'){const result=await q("UPDATE gg_password_recovery SET status='rejected',code_hash=NULL,expiry=NULL,handled=? WHERE id=? AND status IN ('pending','issued')",now(),b.id).run();if(!result.meta.changes)return fail('Demande indisponible',409);await audit('recovery rejected',s);return json({ok:true});}
+if(p==='/api/admin')return json({shops:await all("SELECT g.*, (SELECT email FROM gg_users WHERE shop=g.id AND role='ADMIN' LIMIT 1) email FROM gg_shops g ORDER BY g.name"),requests:await all('SELECT * FROM gg_requests ORDER BY created DESC'),audit:await all('SELECT * FROM gg_audit ORDER BY created DESC LIMIT 100')});
+if(p.startsWith('/api/admin/')&&method==='POST'){
+const log=(action,shop)=>q('INSERT INTO gg_audit VALUES(?,?,?,?,?)',uuid(),s.id,shop,action,now());
+if(p==='/api/admin/approve'||p==='/api/admin/reject'){const x=await one("SELECT * FROM gg_requests WHERE id=? AND status='pending'",b.id);if(!x)return fail('Demande introuvable',404);if(!Object.hasOwn(plans,x.plan)||x.plan==='FREE')return fail('Plan invalide');const approve=p.endsWith('/approve'),days=plans[x.plan][1],stamp=now();const statements=[];if(approve)statements.push(q("UPDATE gg_shops SET plan=?,expiry=? WHERE id=? AND EXISTS(SELECT 1 FROM gg_requests WHERE id=? AND status='pending')",x.plan,days?stamp+days*86400000:null,x.shop,x.id));statements.push(q("UPDATE gg_requests SET status=? WHERE id=? AND status='pending'",approve?'approved':'rejected',x.id));await D.batch(statements);await log(approve?'subscription approved':'subscription rejected',x.shop).run();return json({ok:true});}
+const shop=await one('SELECT * FROM gg_shops WHERE id=?',b.shop);if(!shop)return fail('Boutique introuvable',404);
+if(p==='/api/admin/status'){if(!['active','suspended','archived'].includes(b.status))return fail('Statut invalide');await D.batch([q('UPDATE gg_shops SET status=? WHERE id=?',b.status,shop.id),...(b.status==='active'?[]:[q('DELETE FROM gg_sessions WHERE uid IN (SELECT id FROM gg_users WHERE shop=?)',shop.id)]),log('status:'+b.status,shop.id)]);return json({ok:true});}
+if(p==='/api/admin/plan'){if(!Object.hasOwn(plans,b.plan))return fail('Plan invalide');const days=plans[b.plan][1];await D.batch([q('UPDATE gg_shops SET plan=?,expiry=? WHERE id=?',b.plan,days?now()+days*86400000:null,shop.id),log('plan:'+b.plan,shop.id)]);return json({ok:true});}
+if(p==='/api/admin/extend'){if(shop.expiry===null||!Number.isSafeInteger(b.days)||b.days<1||b.days>3650)return fail('Durée invalide ou plan illimité');await D.batch([q('UPDATE gg_shops SET expiry=max(expiry,?)+? WHERE id=?',now(),b.days*86400000,shop.id),log('extend:'+b.days,shop.id)]);return json({ok:true});}
+if(p==='/api/admin/edit'){const name=textVal(b.name),phone=textVal(b.phone,40),location=textVal(b.location);if(!name)return fail('Nom obligatoire');await D.batch([q('UPDATE gg_shops SET name=?,phone=?,location=? WHERE id=?',name,phone,location,shop.id),log('edit shop',shop.id)]);return json({ok:true});}
+if(p==='/api/admin/revoke'){await D.batch([q('DELETE FROM gg_sessions WHERE uid IN (SELECT id FROM gg_users WHERE shop=?)',shop.id),log('sessions revoked',shop.id)]);return json({ok:true});}
+}}
 if(s.role!=='ADMIN')return fail('Accès interdit',403);const shop=await one('SELECT * FROM gg_shops WHERE id=?',s.shop);if(!shop)return fail('Boutique introuvable',404);
 if(p==='/api/subscribe'&&method==='POST'){if(!plans[b.plan]||b.plan==='FREE'||!String(b.reference||'').trim())return fail('Référence et plan requis');await q('INSERT INTO gg_requests VALUES(?,?,?,?,?,?)',uuid(),s.shop,b.plan,String(b.reference).trim(),'pending',now()).run();return json({ok:true});}
 const mergePublic=async data=>{if(!data)return data;const rows=await all('SELECT id,description,image FROM gg_public WHERE shop=?',s.shop);const byId=new Map(rows.map(r=>[r.id,r]));for(const item of data.products||[]){if(typeof item.published!=='boolean'){const row=byId.get(s.shop+'-'+item.id);item.published=!!row;item.publicDescription=row?.description||'';item.publicImage=row?.image||'';}}return data;};

@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS gg_password_recovery (id TEXT PRIMARY KEY, uid TEXT NOT NULL UNIQUE, created INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'pending', code_hash TEXT, expiry INTEGER, handled INTEGER);
