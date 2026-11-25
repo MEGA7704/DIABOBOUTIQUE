@@ -85,3 +85,7 @@ Tableau des boutiques, plans, prolongations, archivage réversible, sessions et 
 
 ## V6.7 — Récupération de compte
 Exécuter migrations/0005_password_recovery.sql avant déploiement. Demandes clients et boutiques, validation manuelle de l’identité par le Super Admin, code aléatoire à usage unique valable 30 minutes, transmis manuellement par canal vérifié. Aucun envoi automatique.
+
+
+## V6.8 — Paramètres et notifications
+Rubriques internes par boutons, formulaires conservés, fenêtres communes pour alertes, confirmations, saisies et messages dynamiques. Aucune migration supplémentaire. Les validations natives des champs et fenêtres système du navigateur restent natives.
