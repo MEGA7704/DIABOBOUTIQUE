@@ -54,3 +54,9 @@ Menu boutique sans défilement horizontal : Commerce, Finances, Suivi et accès 
 
 ## V5.9 — Panier et commande
 Liste unique, fenêtre de commande, adresse par boutique et devis serveur. Aucun changement SQL requis.
+
+
+## Mise à jour V6.0
+- Refonte visuelle de la section Mon panier.
+- Nouveau pop-up de commande plus professionnel.
+- Présentation en cartes et résumé amélioré.
