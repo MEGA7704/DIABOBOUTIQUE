@@ -28,3 +28,8 @@ assert.equal((await req('password',{current:'wrong',password:'Newpassword123'},c
 console.log('OK — inscription, panier multi-boutiques, isolation, validation, paiement unique, stocks, vente, refus, mot de passe.');
 
 const {localFee,deliveryFee}=await import('../public/_worker.js');for(const [n,f] of [[0,0],[5,1],[4999,500],[5000,250],[24999,1250],[25000,500],[99999,2000],[100000,1500]])assert.equal(localFee(n),f);const config={city:'Diabo',districts:['Marché'],cities:['Bouaké'],methods:[{name:'Car',fee:700}]};assert.equal(deliveryFee(config,100000,{mode:'shipping',city:'Bouaké',method:'Car'}).fee,700);assert.equal(deliveryFee(config,100000,{mode:'pickup'}).fee,0);assert.throws(()=>deliveryFee(config,100000,{mode:'shipping',city:'Diabo',method:'Car'}));console.log('OK — barèmes, retrait, expédition, contrôle local.');
+
+const feeSale=(await ok('load',undefined,a)).data.sales.find(s=>s.id===ao.id);
+assert.equal(feeSale.lines.find(l=>l.productId==='delivery-fee').cost,100);
+assert.equal(feeSale.total-feeSale.lines.reduce((sum,l)=>sum+l.qty*l.cost,0),600);
+console.log('Frais de livraison neutralisés dans la marge.');

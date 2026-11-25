@@ -89,3 +89,11 @@ Exécuter migrations/0005_password_recovery.sql avant déploiement. Demandes cli
 
 ## V6.8 — Paramètres et notifications
 Rubriques internes par boutons, formulaires conservés, fenêtres communes pour alertes, confirmations, saisies et messages dynamiques. Aucune migration supplémentaire. Les validations natives des champs et fenêtres système du navigateur restent natives.
+
+
+## V6.9 — Charges de livraison et expédition
+Les frais facturés au client sont inclus dans le total de facture et neutralisés par un coût direct équivalent. Les anciens frais de commandes en ligne sont corrigés au calcul des rapports et obligations, sans réécriture des ventes protégées. Les entrées de caisse restent les sommes réellement encaissées ; aucun décaissement fictif n'est créé. Si le coût réel du transport est enregistré en dépense, éviter une seconde imputation de la même charge dans le résultat (la présente version ne rapproche pas automatiquement ces dépenses). Les obligations déjà réglées ne sont pas annulées automatiquement. Aucune migration D1 supplémentaire.
+
+
+## V7.0
+Champ Frais de service (FCFA) affiché uniquement pour le type Service, enregistré dans le catalogue interne, valeur par défaut 0. Aucun changement des calculs de vente ou de bénéfice. Aucune migration SQL.
