@@ -48,3 +48,9 @@ Le catalogue public détecte la session professionnelle et affiche Mon espace bo
 - Icônes retirées des onglets du menu principal.
 - Lien "Paramètres / abonnement" retiré du coin supérieur.
 - Bouton "Déconnexion" remplacé par une icône seule.
+
+## V5.8
+Menu boutique sans défilement horizontal : Commerce, Finances, Suivi et accès directs. Sur mobile, bouton Menu déroulant. Aucune migration.
+
+## V5.9 — Panier et commande
+Liste unique, fenêtre de commande, adresse par boutique et devis serveur. Aucun changement SQL requis.
