@@ -66,3 +66,9 @@ Liste unique, fenêtre de commande, adresse par boutique et devis serveur. Aucun
 - Commandes en petites bandes cliquables.
 - Détail des commandes en pop-up.
 - Bouton « Régler mon achat » déplacé dans le pop-up.
+
+## V6.2
+Commandes reçues : liste compacte et détail en fenêtre modale, actions existantes conservées. Aucune migration.
+
+## V6.3 — Confirmation obligatoire de la déclaration client
+Aucun encaissement de commande sans déclaration préalable. Référence, mode, montant et identifiant de déclaration contrôlés côté serveur. En cas de non-réception, rejeter la déclaration pour permettre au client de la renouveler. Aucune migration supplémentaire.
