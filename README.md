@@ -114,3 +114,16 @@ Dans Paramètres > Paiement · Livraison · Expéditions, renseigner le numéro 
 
 ## V7.5
 Panier de services : détail des prestations, aucune adresse ou option de livraison par boutique sans produit, frais nuls contrôlés côté serveur. Panier mixte : livraison des produits seulement, barème sur leur sous-total. Coordonnées client conservées. Aucune migration.
+
+## V7.6
+Suppression des deux mentions FNE demandées dans le modèle de facture commerciale. Cette modification visuelle ne confère aucune certification fiscale. Aucune migration.
+
+
+## Mise à jour V7.7
+- Sous-texte de la page Commandes clients retiré.
+- Pieds de page centrés et maintenus en bas des pages.
+
+
+## Mise à jour V7.8
+- Retrait des textes d'introduction du tableau de bord.
+- Suppression du bandeau de synchronisation Cloudflare D1.
