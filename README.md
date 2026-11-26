@@ -127,3 +127,9 @@ Suppression des deux mentions FNE demandées dans le modèle de facture commerci
 ## Mise à jour V7.8
 - Retrait des textes d'introduction du tableau de bord.
 - Suppression du bandeau de synchronisation Cloudflare D1.
+
+
+## V7.9 — Paramètres épurés
+- Retrait du titre redondant et de son sous-titre.
+- Le lien Wave est modifiable uniquement dans Paiement · Livraison · Expéditions ; les relances de créances utilisent ce lien. Si aucune configuration de livraison n'existe, un ancien lien Wave valide est proposé. Une configuration existante prévaut, même si son lien est vide.
+- Aucune migration.
