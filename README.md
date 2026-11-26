@@ -107,3 +107,10 @@ Stock et seuil d'alerte réservés aux produits. Prix libellé selon le mode, ma
 
 ## V7.3 — Frais de service et bénéfices
 Les frais de service configurés sont désormais un supplément unitaire facturé lors des nouvelles ventes, au comptoir et en ligne. Le prix public affiché comprend le prix de base + les frais, sans calcul fiscal. Le coût estimé reste calculé sur le prix de base, les frais de service n'ont pas de coût direct. Le montant unitaire des frais est figé dans chaque nouvelle ligne de vente et de commande. Le résumé financier, le détail par article, l'impression et le CSV distinguent les frais facturés nets des remises proportionnelles, déjà inclus dans le CA et la marge. La quote-part des frais encaissés est estimée proportionnellement aux paiements reçus durant la période. Les frais de livraison restent neutralisés. Les anciennes ventes et commandes sans frais figés ne sont pas rétroactivement augmentées. Aucune migration supplémentaire.
+
+
+### V7.4 — Relance WhatsApp
+Dans Paramètres > Paiement · Livraison · Expéditions, renseigner le numéro WhatsApp international de la boutique (ex. +225 07 00 00 00 00). Le numéro est enregistré dans la configuration existante. Dans le détail client, la relance est disponible pour les commandes en attente ou validées non payées, et masquée pour les commandes payées ou refusées. Le message prérempli est ouvert dans WhatsApp ; le client doit confirmer son envoi. Aucun statut de livraison distinct n’existe actuellement. Aucune migration SQL supplémentaire.
+
+## V7.5
+Panier de services : détail des prestations, aucune adresse ou option de livraison par boutique sans produit, frais nuls contrôlés côté serveur. Panier mixte : livraison des produits seulement, barème sur leur sous-total. Coordonnées client conservées. Aucune migration.
