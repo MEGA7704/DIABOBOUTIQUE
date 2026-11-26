@@ -139,3 +139,9 @@ Suppression des deux mentions FNE demandées dans le modèle de facture commerci
 - Refonte professionnelle de la fiche de détail produit/service.
 - Présentation en deux colonnes avec image, prix, disponibilité et actions améliorées.
 - Boutons de contact, partage et copie de lien mieux organisés.
+
+
+## Mise à jour V8.1
+- Cadre image aligné en hauteur avec le panneau d'information du produit/service.
+- Bouton « Copier le lien » supprimé.
+- Boutons d'action maintenus sur une seule ligne, sans défilement sur grand écran.
