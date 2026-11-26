@@ -133,3 +133,9 @@ Suppression des deux mentions FNE demandées dans le modèle de facture commerci
 - Retrait du titre redondant et de son sous-titre.
 - Le lien Wave est modifiable uniquement dans Paiement · Livraison · Expéditions ; les relances de créances utilisent ce lien. Si aucune configuration de livraison n'existe, un ancien lien Wave valide est proposé. Une configuration existante prévaut, même si son lien est vide.
 - Aucune migration.
+
+
+## Mise à jour V8.0
+- Refonte professionnelle de la fiche de détail produit/service.
+- Présentation en deux colonnes avec image, prix, disponibilité et actions améliorées.
+- Boutons de contact, partage et copie de lien mieux organisés.
