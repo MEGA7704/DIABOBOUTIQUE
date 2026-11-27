@@ -151,3 +151,7 @@ Un seul bouton Connexion. Authentification commune, orientation selon le rôle r
 
 ## V8.3 — Obligations à durée définie
 Nouvelles obligations exclusivement proportionnelles aux bénéfices, sans jour d’échéance. Durée de 1, 3, 6, 12 ou 1 à 120 mois personnalisés, à compter du mois courant inclus. Les anciennes obligations et leurs règlements sont conservés sans conversion automatique.
+
+
+## V8.4
+Rapports : sélection générale, mensuelle (année et mois) ou personnalisée. Impression et PDF selon les dates sélectionnées.
