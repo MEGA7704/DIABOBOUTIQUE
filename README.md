@@ -164,3 +164,11 @@ Suppression corrective des ventes comptoir actives avec restitution des stocks e
 
 ## V8.7
 Suppression groupée des ventes comptoir sélectionnées, sélection de toutes les lignes filtrées, retrait du bouton Annuler. Validation du lot avant sauvegarde unique. Les commandes payées et ventes annulées restent protégées.
+
+## V8.8 — Trésorerie mensuelle
+Sélection générale, mensuelle ou personnalisée ; solde initial, flux, solde final, soldes par mode à fin de période et journal imprimable. Aucune migration.
+
+## V8.9 — Étiquettes personnalisables
+- Formats A4 de 2 à 30 étiquettes selon les formats proposés, quantités individuelles, maximum 500 par lot.
+- QR texte : référence, prix imprimé et URL publique. Le lien ne fonctionne que pour les offres publiées et actives ; réimprimer après changement de prix.
+- Tests existants et décodage QR local réussis. Impression physique non vérifiée.

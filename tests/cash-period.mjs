@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const s=readFileSync(new URL('../public/gestion.html',import.meta.url),'utf8');
+const f=(a,b)=>s.slice(s.indexOf('function '+a+'('),s.indexOf('function '+b+'('));
+const calc=new Function(f('v3Balance','selectCashPeriod')+';return cashPeriodData')();
+const bounds=new Function(f('reportMonthBounds','selectReportPeriod')+';return reportMonthBounds')();
+assert.deepEqual(bounds(2024,2),['2024-02-01','2024-02-29']);
+assert.deepEqual(bounds(2026,2),['2026-02-01','2026-02-28']);
+const rows=[{date:'2026-01-31',type:'Entrée',amount:100,method:'Wave'},{date:'2026-02-01',type:'Entrée',amount:80,method:'Espèces'},{date:'2026-02-28',type:'Sortie',amount:30,method:'Wave'},{date:'2026-03-01',type:'Entrée',amount:999,method:'Wave'}];
+const d=calc(rows,...bounds(2026,2));assert.equal(d.opening,100);assert.equal(d.entries,80);assert.equal(d.exits,30);assert.equal(d.net,50);assert.equal(d.ending,150);assert.equal(d.filtered.length,2);assert.deepEqual(Object.fromEntries(d.methods),{'Espèces':80,Wave:70});const empty=calc(rows,...bounds(2026,4));assert.equal(empty.net,0);assert.equal(empty.opening,1149);assert.equal(empty.ending,1149);console.log('Trésorerie : périodes, report initial, solde final, modes et mois vide OK');

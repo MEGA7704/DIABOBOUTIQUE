@@ -7,7 +7,7 @@
     "dev": "wrangler pages dev public",
     "deploy": "wrangler pages deploy public",
     "migrate": "wrangler d1 migrations apply mirabelle_d1 --remote",
-    "test": "node --check public/_worker.js && node --check public/app.js && node tests/orders.mjs && node tests/service-pricing.mjs && node tests/service-fees.mjs && node tests/sale-delete.mjs"
+    "test": "node --check public/_worker.js && node --check public/app.js && node tests/orders.mjs && node tests/service-pricing.mjs && node tests/service-fees.mjs && node tests/sale-delete.mjs && node tests/cash-period.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
