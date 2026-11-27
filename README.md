@@ -158,3 +158,9 @@ Rapports : sélection générale, mensuelle (année et mois) ou personnalisée. 
 
 ## V8.5
 Modification des obligations avec conservation des règlements; suppression définitive avec annulation des écritures de dépense liées, après confirmation. Aucun remboursement réel automatique.
+
+## V8.6
+Suppression corrective des ventes comptoir actives avec restitution des stocks et recalcul des comptes. Les ventes en ligne payées et les annulations déjà comptabilisées restent protégées. Aucun remboursement externe automatique.
+
+## V8.7
+Suppression groupée des ventes comptoir sélectionnées, sélection de toutes les lignes filtrées, retrait du bouton Annuler. Validation du lot avant sauvegarde unique. Les commandes payées et ventes annulées restent protégées.
