@@ -172,3 +172,6 @@ Sélection générale, mensuelle ou personnalisée ; solde initial, flux, solde 
 - Formats A4 de 2 à 30 étiquettes selon les formats proposés, quantités individuelles, maximum 500 par lot.
 - QR texte : référence, prix imprimé et URL publique. Le lien ne fonctionne que pour les offres publiées et actives ; réimprimer après changement de prix.
 - Tests existants et décodage QR local réussis. Impression physique non vérifiée.
+
+## V9.0 — QR de vente avec lien direct
+Le QR contient exclusivement l’URL de la fiche publique du produit ou service. Le prix et la référence restent visibles sur l’étiquette imprimée. Les offres non publiées restent inaccessibles au public. Les anciennes étiquettes doivent être réimprimées pour bénéficier du nouveau QR.
