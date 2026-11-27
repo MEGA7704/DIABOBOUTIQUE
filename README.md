@@ -155,3 +155,6 @@ Nouvelles obligations exclusivement proportionnelles aux bénéfices, sans jour 
 
 ## V8.4
 Rapports : sélection générale, mensuelle (année et mois) ou personnalisée. Impression et PDF selon les dates sélectionnées.
+
+## V8.5
+Modification des obligations avec conservation des règlements; suppression définitive avec annulation des écritures de dépense liées, après confirmation. Aucun remboursement réel automatique.
