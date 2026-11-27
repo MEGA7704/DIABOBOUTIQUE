@@ -145,3 +145,6 @@ Suppression des deux mentions FNE demandées dans le modèle de facture commerci
 - Cadre image aligné en hauteur avec le panneau d'information du produit/service.
 - Bouton « Copier le lien » supprimé.
 - Boutons d'action maintenus sur une seule ligne, sans défilement sur grand écran.
+
+## V8.2 — Connexion unique
+Un seul bouton Connexion. Authentification commune, orientation selon le rôle retourné par le serveur, inscription client ou boutique au choix et récupération commune. Anciennes routes conservées.
