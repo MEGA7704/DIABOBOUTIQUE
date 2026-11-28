@@ -60,3 +60,16 @@ await ok('shop/orders/pay',{...svcPay,declarationId:svcDecl.id},a);
 const svcSale=(await ok('load',undefined,a)).data.sales.find(x=>x.id===svcOrder.id);
 assert.equal(svcSale.lines[0].serviceFee,500);assert.equal(svcSale.lines[0].cost,7000);assert.equal(svcSale.total,21000);assert.equal(svcSale.total-svcSale.lines[0].qty*svcSale.lines[0].cost,7000);
 console.log('OK — frais de service publics, facturation, marge et conservation du tarif commandé.');
+
+// R2 simulé : migration des photos, isolation et publication.
+const objects=new Map();env.MEDIA={head:async k=>objects.has(k)?{}:null,put:async(k,v)=>{objects.set(k,v)},get:async k=>objects.has(k)?{body:objects.get(k)}:null};
+const photo='data:image/jpeg;base64,/9j/2Q==';
+let imageLoad=await ok('load',undefined,a);imageLoad.data.products[0].publicImage=photo;
+const savedImage=await ok('save',{version:imageLoad.version,data:imageLoad.data},a);const url=savedImage.imageUpdates[0].url;assert.ok(url.startsWith('/api/media/'+a.shop.id+'/'));assert.equal(objects.size,1);
+assert.equal((await ok('catalog')).find(x=>x.id===ida).image,url);
+const getImage=async(session)=>worker.fetch(new Request(origin+url,{headers:session?{Cookie:session.cookie}:{}}),env);
+assert.equal((await getImage()).status,200);
+imageLoad=await ok('load',undefined,a);imageLoad.data.products[0].published=false;await ok('save',{version:imageLoad.version,data:imageLoad.data},a);
+assert.equal((await getImage()).status,404);assert.equal((await getImage(b)).status,404);assert.equal((await getImage(a)).status,200);
+const otherLoad=await ok('load',undefined,b);otherLoad.data.products[0].publicImage=url;assert.equal((await req('save',{version:otherLoad.version,data:otherLoad.data},b)).status,400);
+console.log('OK — R2 simulé, migration, publication, confidentialité, isolation.');
