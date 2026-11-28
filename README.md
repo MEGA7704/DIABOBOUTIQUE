@@ -179,3 +179,6 @@ Le QR contient exclusivement l’URL de la fiche publique du produit ou service.
 
 ## V9.1 — stockage R2 des photos catalogue
 Créer un bucket privé `diabo-boutique-media` dans Cloudflare R2, puis vérifier la liaison `MEDIA` dans Workers & Pages > projet > Settings > Bindings. Redéployer. Ne pas activer r2.dev. D1/KV et migrations existantes inchangés. Les photos JPEG importées (y compris anciennes photos Base64) sont transférées lors de la prochaine sauvegarde réussie de chaque boutique. Les liens externes HTTPS et les logos des rapports restent inchangés. Les images non publiées sont réservées au propriétaire connecté. Les objets sont dédupliqués par empreinte SHA-256 dans chaque boutique. Les anciens objets sont conservés pour éviter de casser les sauvegardes ; aucun nettoyage automatique. Les sauvegardes JSON contiennent des références R2 et ne sont donc plus autonomes : sauvegarder séparément le bucket, sans le supprimer. Les limites existantes de compression et taille des requêtes sont conservées. Tester sur Cloudflare avant usage réel.
+
+## V9.3 — Logo responsive
+Logo optimisé, nom non répété dans le catalogue, dimensions adaptées aux petits écrans. R2 conservé.
