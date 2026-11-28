@@ -182,3 +182,7 @@ Créer un bucket privé `diabo-boutique-media` dans Cloudflare R2, puis vérifie
 
 ## V9.3 — Logo responsive
 Logo optimisé, nom non répété dans le catalogue, dimensions adaptées aux petits écrans. R2 conservé.
+
+
+## V9.4 — Catalogue aléatoire
+Les offres publiques sont mélangées à chaque chargement du catalogue (Fisher–Yates). Les filtres et la pagination conservent cet ordre jusqu’au prochain chargement. Les espaces de gestion ne changent pas.
